@@ -11,9 +11,21 @@
 |
 */
 
-Route::get('/', function () {
-    return view('welcome');
+Route::get('login', 'UserController@getLogin')->name('login');
+Route::post('login', 'UserController@postLogin');
+Route::group(['middleware'=>'auth'], function(){
+
+    Route::get('/', function () {
+        return view('welcome');
+    });
+
+
+    Route::group(['middleware'=>'permission'], function(){
+
+    });
 });
-Route::get('/test', function(){
-   return view('themes.default.layout');
+
+
+Route::get('/install', function(){
+
 });
