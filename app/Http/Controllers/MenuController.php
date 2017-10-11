@@ -37,10 +37,10 @@ class MenuController extends Controller
             if (!empty($item['child'])) {
                 foreach ($item['child'] as $k => $c) {
                     if (!p($c['path'], 'get')) {
-                        unset($data[$key][$k]);
+                        unset($data[$key]['child'][$k]);
                     }
                 }
-                if (empty($data[$key]))
+                if (empty($data[$key]['child']))
                     unset($data[$key]);
             } else {
                 if (!p($item['url'], 'get'))

@@ -27,6 +27,6 @@ Route::group(['middleware'=>'auth'], function(){
 
 
 Route::get('/install', function(){
-//    echo '<pre>';
+    echo '<pre>';
     print_r(render_menu(array_merge(menu(1),plugin_menu())));
 });

@@ -17,6 +17,7 @@ class CreatePermissionTable extends Migration
             $table->increments('id');
             $table->string('name');
             $table->string('permission');
+            $table->string('method');
             $table->integer('type');
             $table->timestamps();
             $table->softDeletes();
