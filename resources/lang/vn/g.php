@@ -1,0 +1,10 @@
+<?php
+/**
+ * Created by PhpStorm.
+ * User: tuan3
+ * Date: 10/12/2017
+ * Time: 4:43 PM
+ */
+return [
+  'search'  =>  'Tìm kiếm'
+];
