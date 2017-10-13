@@ -8,12 +8,12 @@ $mainmenu   =   render_menu(array_merge(menu(1),plugin_menu()));
                 <a href="#" class="dropdown-toggle" data-toggle="dropdown">{{!empty($menu['trans'])&&\Illuminate\Support\Facades\Lang::has($menu['trans'])?trans($menu['trans']):$menu['name']}} <span class="caret"></span></a>
                 <ul class="dropdown-menu" role="menu">
                     @foreach($menu['child'] as $child)
-                    <li><a href="{{$child['path']}}">{{!empty($child['trans'])&&\Illuminate\Support\Facades\Lang::has($child['trans'])?trans($child['trans']):$child['name']}}</a></li>
+                    <li><a href="{{asset($child['path'])}}">{{!empty($child['trans'])&&\Illuminate\Support\Facades\Lang::has($child['trans'])?trans($child['trans']):$child['name']}}</a></li>
                     @endforeach
                 </ul>
             </li>
         @else
-            <li><a href="{{$menu['url']}}">{{!empty($menu['trans'])&&\Illuminate\Support\Facades\Lang::has($menu['trans'])?trans($menu['trans']):$menu['name']}}</a></li>
+            <li><a href="{{asset($menu['url'])}}">{{!empty($menu['trans'])&&\Illuminate\Support\Facades\Lang::has($menu['trans'])?trans($menu['trans']):$menu['name']}}</a></li>
         @endif
     @endforeach
 </ul>

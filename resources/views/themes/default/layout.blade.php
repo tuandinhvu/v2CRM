@@ -17,7 +17,7 @@
     <!-- AdminLTE Skins. Choose a skin from the css/skins
          folder instead of downloading all of them to reduce the load. -->
     <link rel="stylesheet" href="{{asset('themes/default/css/skins/_all-skins.min.css')}}">
-
+    <link rel="stylesheet" href="{{asset('plugins/jquery.datatables/css/jquery.dataTables.min.css')}}" />
     <!-- HTML5 Shim and Respond.js IE8 support of HTML5 elements and media queries -->
     <!-- WARNING: Respond.js doesn't work if you view the page via file:// -->
     <!--[if lt IE 9]>
@@ -49,13 +49,13 @@
                         <i class="fa fa-bars"></i>
                     </button>
                 </div>
-
+                @if(auth()->check())
                 <!-- Collect the nav links, forms, and other content for toggling -->
                 <div class="collapse navbar-collapse pull-left" id="navbar-collapse">
                     @include(theme(TRUE).'.blocks.main-menu')
                     <form class="navbar-form navbar-left" role="search">
                         <div class="form-group">
-                            <input type="text" class="form-control" id="navbar-search-input" placeholder="{{trans('g.search')}}">
+                            <input type="text" class="form-control" id="navbar-search-input" placeholder="{{trans('g.search')}}" />
                         </div>
                     </form>
                 </div>
@@ -135,6 +135,7 @@
                         </li>
                     </ul>
                 </div>
+                @endif
             <!-- /.container-fluid -->
         </nav>
 
@@ -159,6 +160,20 @@
 
         <!-- Main content -->
         <section class="content">
+            @if (!empty(session('message')))
+            <div class="alert alert-{{session('message.type')}}">
+                {{session('message.message')}}
+            </div>
+            @endif
+                @if (count($errors) > 0)
+                    <div class="alert alert-danger">
+                        <ul>
+                            @foreach ($errors->all() as $error)
+                                <li>{{ $error }}</li>
+                            @endforeach
+                        </ul>
+                    </div>
+            @endif
             <!-- Default box -->
         @yield('content')
             <!-- /.box -->
@@ -189,6 +204,8 @@
 <script src="{{asset('themes/default/components/fastclick/lib/fastclick.js')}}"></script>
 <!-- AdminLTE App -->
 <script src="{{asset('themes/default/js/adminlte.min.js')}}"></script>
+<script src="{{asset('plugins/bootbox.min.js')}}"></script>
+<script src="{{asset('plugins/jquery.datatables/js/jquery.dataTables.js')}}"></script>
 @yield('js')
 </body>
 </html>

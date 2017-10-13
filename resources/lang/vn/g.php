@@ -6,5 +6,7 @@
  * Time: 4:43 PM
  */
 return [
-  'search'  =>  'Tìm kiếm'
+  'search'  =>  'Tìm kiếm',
+    'edit'  =>  'Sửa',
+    'delete'    =>  'Xóa'
 ];

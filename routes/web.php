@@ -21,7 +21,13 @@ Route::group(['middleware'=>'auth'], function(){
 
 
     Route::group(['middleware'=>'permission'], function(){
-
+        Route::get('config/groups', 'GroupController@getList');
+        Route::get('config/groups/data', 'GroupController@dataList');
+        Route::get('config/groups/create', 'GroupController@getCreate');
+        Route::post('config/groups/create', 'GroupController@postCreate');
+        Route::get('config/group/del', 'GroupController@getDelete');
+        Route::get('config/group/edit', 'GroupController@getEdit');
+        Route::post('config/group/edit', 'GroupController@postEdit');
     });
 });
 

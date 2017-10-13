@@ -6,5 +6,8 @@
  * Time: 8:59 AM
  */
 return [
-    'index' =>  'Trang chủ'
+    'index' =>  'Trang chủ',
+    'rolelist'  =>  'Danh sách quyền',
+    'creategroup'   =>  'Tạo thêm quyền',
+    'editgroup' =>  'Sửa thông tin'
 ];

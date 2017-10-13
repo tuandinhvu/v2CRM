@@ -9,5 +9,13 @@ return [
     'users' =>  'Thành viên',
     'groups'    =>  'Nhóm thành viên',
     'permissions'    =>  'Cấp quyền',
-    'permission_role'   =>  'Phân quyền'
+    'permission_role'   =>  'Phân quyền',
+    'delete_confirm'    =>  'Xác nhận xóa?',
+    'delete_success'    =>  'Xóa thành công!',
+    'edit_success'  =>  'Sửa thành công',
+    'not_exist'     =>  'Bản ghi không tồn tại!',
+    'cancel'    =>  'Quay lại',
+    'submit'    =>  'Lưu lại',
+    'add'       =>  'Thêm mới',
+    'back'      =>  'Quay lại'
 ];
