@@ -60,7 +60,7 @@ class MenuSeeding extends Seeder
                         'trans' => 'system.permissions'
                     ],
                     [
-                        'path' => 'quan-tri/bang-phan-quyen',
+                        'path' => 'config/permission-table',
                         'name'  =>  'Permission table',
                         'trans' => 'system.permission_role'
                     ]

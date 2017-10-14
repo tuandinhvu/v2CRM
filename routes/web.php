@@ -22,6 +22,10 @@ Route::group(['middleware'=>'auth'], function(){
 
     Route::group(['middleware'=>'permission'], function(){
         Route::group(['prefix'=>'config'], function(){
+
+            Route::get('system', 'SystemController@getSystem');
+            Route::post('system', 'SystemController@postSystem');
+
             Route::get('groups', 'GroupController@getList');
             Route::get('groups/data', 'GroupController@dataList');
             Route::get('groups/create', 'GroupController@getCreate');
@@ -45,6 +49,8 @@ Route::group(['middleware'=>'auth'], function(){
             Route::get('branch/del', 'BranchController@getDelete');
             Route::get('branch/edit', 'BranchController@getEdit');
             Route::post('branch/edit', 'BranchController@postEdit');
+
+
         });
 
     });
@@ -54,4 +60,4 @@ Route::group(['middleware'=>'auth'], function(){
 Route::get('/install', function(){
     echo '<pre>';
     print_r(render_menu(array_merge(menu(1),plugin_menu())));
-});
+}); 
