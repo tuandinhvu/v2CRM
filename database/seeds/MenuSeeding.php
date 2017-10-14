@@ -50,6 +50,11 @@ class MenuSeeding extends Seeder
                         'trans' => 'system.groups'
                     ],
                     [
+                        'path' => 'config/branches',
+                        'name'  =>  'Branches list',
+                        'trans' => 'system.branches'
+                    ],
+                    [
                         'path' => 'config/permissions',
                         'name'  =>  'Permissions',
                         'trans' => 'system.permissions'

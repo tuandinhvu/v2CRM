@@ -11,5 +11,8 @@ return [
     'creategroup'   =>  'Tạo thêm quyền',
     'editgroup' =>  'Sửa thông tin',
     'userlist'  =>  'Danh sách thành viên',
-    'createuser'    =>  'Thêm thành viên mới'
+    'createuser'    =>  'Thêm thành viên mới',
+    'branchlist'    =>  'Danh sách chi nhánh',
+    'createbranch'  =>  'Thêm chi nhánh',
+    'editbranch'    =>  'Sửa chi nhánh'
 ];

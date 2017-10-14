@@ -37,6 +37,14 @@ Route::group(['middleware'=>'auth'], function(){
             Route::get('user/del', 'UserController@getDelete');
             Route::get('user/edit', 'UserController@getEdit');
             Route::post('user/edit', 'UserController@postEdit');
+
+            Route::get('branches', 'BranchController@getList');
+            Route::get('branches/data', 'BranchController@dataList');
+            Route::get('branches/create', 'BranchController@getCreate');
+            Route::post('branches/create', 'BranchController@postCreate');
+            Route::get('branch/del', 'BranchController@getDelete');
+            Route::get('branch/edit', 'BranchController@getEdit');
+            Route::post('branch/edit', 'BranchController@postEdit');
         });
 
     });

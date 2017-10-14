@@ -8,6 +8,7 @@ return [
     'ipaccess'  =>  'IP truy cập',
     'users' =>  'Thành viên',
     'groups'    =>  'Nhóm thành viên',
+    'branches'  =>  'Chi nhánh',
     'permissions'    =>  'Cấp quyền',
     'permission_role'   =>  'Phân quyền',
     'delete_confirm'    =>  'Xác nhận xóa?',
