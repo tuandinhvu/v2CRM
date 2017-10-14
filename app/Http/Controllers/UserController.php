@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\Http\Requests\EditUserRequest;
 use App\Http\Requests\FormUserRequest;
 use App\Http\Requests\LoginRequest;
 use App\User;
@@ -73,19 +74,24 @@ class UserController extends Controller
     }
     public function getEdit()
     {
-        $data   =   Group::find(request('id'));
+        $data   =   User::find(request('id'));
         if(!empty($data)){
-            return v('config.editGroup', compact('data'));
+            return v('users.edit', compact('data'));
         }else{
             set_notice(trans('system.not_exist'), 'warning');
             return redirect()->back();
         }
     }
-    public function postEdit(FormGroupRequest $request)
+    public function postEdit(EditUserRequest $request)
     {
-        $data   =   Group::find($request->id);
+        $data   =   User::find($request->id);
         if(!empty($data)){
-            $data->name =   $request->name;
+            $data->name   =   $request->name;
+            $data->email    =   $request->email;
+            if($request->has('password'))
+                $data->password =   Hash::make($request->password);
+            $data->branch_id    =   $request->branch_id;
+            $data->group_id =   $request->group_id;
             $data->save();
             set_notice(trans('system.edit_success'), 'success');
         }else
@@ -94,7 +100,7 @@ class UserController extends Controller
     }
     public function getDelete()
     {
-        $data   =   Group::find(request('id'));
+        $data   =   User::find(request('id'));
         if(!empty($data)){
             $data->delete();
             set_notice(trans('system.delete_success'), 'success');
