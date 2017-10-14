@@ -19,7 +19,7 @@
                     {{csrf_field()}}
                     <div class="box-body">
                         <div class="form-group">
-                            <label for="inputEmail3" class="col-sm-2 control-label">{{trans('groups.name')}}</label>
+                            <label class="col-sm-2 control-label">{{trans('groups.name')}}</label>
 
                             <div class="col-sm-10">
                                 <input type="text" class="form-control" name="name" placeholder="{{trans('groups.nameplacehold')}}" value="{{old('name', !empty($data->name)?$data->name:'')}}">

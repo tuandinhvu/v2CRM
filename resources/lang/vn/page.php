@@ -9,5 +9,7 @@ return [
     'index' =>  'Trang chủ',
     'rolelist'  =>  'Danh sách quyền',
     'creategroup'   =>  'Tạo thêm quyền',
-    'editgroup' =>  'Sửa thông tin'
+    'editgroup' =>  'Sửa thông tin',
+    'userlist'  =>  'Danh sách thành viên',
+    'createuser'    =>  'Thêm thành viên mới'
 ];

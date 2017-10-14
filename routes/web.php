@@ -21,13 +21,24 @@ Route::group(['middleware'=>'auth'], function(){
 
 
     Route::group(['middleware'=>'permission'], function(){
-        Route::get('config/groups', 'GroupController@getList');
-        Route::get('config/groups/data', 'GroupController@dataList');
-        Route::get('config/groups/create', 'GroupController@getCreate');
-        Route::post('config/groups/create', 'GroupController@postCreate');
-        Route::get('config/group/del', 'GroupController@getDelete');
-        Route::get('config/group/edit', 'GroupController@getEdit');
-        Route::post('config/group/edit', 'GroupController@postEdit');
+        Route::group(['prefix'=>'config'], function(){
+            Route::get('groups', 'GroupController@getList');
+            Route::get('groups/data', 'GroupController@dataList');
+            Route::get('groups/create', 'GroupController@getCreate');
+            Route::post('groups/create', 'GroupController@postCreate');
+            Route::get('group/del', 'GroupController@getDelete');
+            Route::get('group/edit', 'GroupController@getEdit');
+            Route::post('group/edit', 'GroupController@postEdit');
+
+            Route::get('users', 'UserController@getList');
+            Route::get('users/data', 'UserController@dataList');
+            Route::get('users/create', 'UserController@getCreate');
+            Route::post('users/create', 'UserController@postCreate');
+            Route::get('user/del', 'UserController@getDelete');
+            Route::get('user/edit', 'UserController@getEdit');
+            Route::post('user/edit', 'UserController@postEdit');
+        });
+
     });
 });
 
