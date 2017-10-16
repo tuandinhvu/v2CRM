@@ -14,5 +14,6 @@ return [
     'createuser'    =>  'Thêm thành viên mới',
     'branchlist'    =>  'Danh sách chi nhánh',
     'createbranch'  =>  'Thêm chi nhánh',
-    'editbranch'    =>  'Sửa chi nhánh'
+    'editbranch'    =>  'Sửa chi nhánh',
+    'config'    =>  'Cấu hình hệ thống'
 ];

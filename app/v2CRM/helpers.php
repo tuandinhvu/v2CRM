@@ -55,3 +55,45 @@ function set_notice($message, $type='warning'){
     \Illuminate\Support\Facades\Session::flash('message.type',$type);
     \Illuminate\Support\Facades\Session::flash('message.message',$message);
 }
+
+//setting helpers
+function opt_input($name, $type, $values=[]){
+    switch ($type){
+        case 'text':
+            $result = "<input type='text' name='$name' class='form-control' value='".settings($name,'')."' />";
+            break;
+        case 'checkbox':
+            $result =   "";
+            foreach($values as $item){
+                $checked    =   in_array($item['value'], json_decode(settings($name)))?'checked':'';
+                $result.= "<input type='checkbox' name='$name' value='".$item['value']."' $checked /> ".$item['label']."  ";
+            }
+            break;
+        case 'radio':
+            $result =   "";
+            foreach($values as $item){
+                $checked    =   $item['value'] == settings($name)?'checked':'';
+                $result.= "<input type='checkbox' name='$name' value='".$item['value']."' $checked /> ".$item['label']."  ";
+            }
+            break;
+        case 'select':
+            $result =   "<select name='$name' class='form-control'>";
+            foreach($values as $item){
+                $selected   =   $item['value']==settings($name)?'selected':'';
+                $result.= "<option value='".$item['value']."' $selected > ".$item['label']."</option>  ";
+            }
+            $result.=   "</select>";
+            break;
+        case 'textarea':
+            $result =   "<textarea class='form-control' name='$name'>".settings($name)."</textarea>";
+            break;
+        default:
+            $result =   '';
+            break;
+    }
+    return $result;
+}
+
+function get_opt($source,$name){
+    return settings($source.'_'.$name, FALSE);
+}
