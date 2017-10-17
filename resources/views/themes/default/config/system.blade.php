@@ -12,10 +12,15 @@
                     <h3 class="box-title">{{trans('page.config')}}</h3>
 
                     <div class="box-tools pull-right">
-                    
+
                     </div>
                 </div>
                 <div class="box-body">
+                    <ul class="nav nav-pills nav-tabs">
+                        @foreach($categories as $item)
+                        <li class="{{request('source','system')==$item['source']?'active':''}}"><a href="{{asset('config/system?source='.$item['source'])}}">{{$item['name']}}</a></li>
+                        @endforeach
+                    </ul>
                     <form method="post">
                         {{csrf_field()}}
                         @foreach($options as $item)
@@ -32,8 +37,7 @@
                     @endforeach
                     <!-- /.box-body -->
                         <div class="box-footer">
-                            <button type="reset" class="btn btn-default">{{trans('system.cancel')}}</button>
-                            <button type="submit" class="btn btn-info pull-right">{{trans('system.submit')}}</button>
+                            <button type="submit" class="btn btn-primary pull-right">{{trans('system.submit')}}</button>
                         </div>
                     </form>
                 </div>

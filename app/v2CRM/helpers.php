@@ -66,7 +66,7 @@ function opt_input($name, $type, $values=[]){
             $result =   "";
             foreach($values as $item){
                 $checked    =   in_array($item['value'], json_decode(settings($name)))?'checked':'';
-                $result.= "<input type='checkbox' name='$name' value='".$item['value']."' $checked /> ".$item['label']."  ";
+                $result.= "<input type='checkbox' name='".$name."[]' value='".$item['value']."' $checked /> ".$item['label']."  ";
             }
             break;
         case 'radio':

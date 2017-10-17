@@ -20,7 +20,7 @@ class UserController extends Controller
 
     public function postLogin(LoginRequest $request)
     {
-        $logins =   json_decode(settings('loginas', json_encode(['id'])), 'true');
+        $logins =   json_decode(settings('system_loginas', json_encode(['id'])), 'true');
         if(in_array('username',$logins))
             $loginUsername   =   auth()->attempt(['name'=>$request->input('id'),'password'=>$request->input('password')], $request->has('remember'));
         if(in_array('email',$logins))
