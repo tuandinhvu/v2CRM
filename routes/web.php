@@ -50,7 +50,13 @@ Route::group(['middleware'=>'auth'], function(){
             Route::get('branch/edit', 'BranchController@getEdit');
             Route::post('branch/edit', 'BranchController@postEdit');
 
-
+            Route::get('permissions', 'PermissionController@getList');
+            Route::get('permissions/data', 'PermissionController@getData');
+            Route::get('permissions/create', 'PermissionController@getCreate');
+            Route::post('permissions/create', 'PermissionController@postCreate');
+            Route::get('permissions/del', 'PermissionController@getDelete');
+            Route::get('permissions/edit', 'PermissionController@getEdit');
+            Route::post('permissions/edit', 'PermissionController@postEdit');
         });
 
     });

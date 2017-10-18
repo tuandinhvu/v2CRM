@@ -8,5 +8,7 @@
 return [
   'search'  =>  'Tìm kiếm',
     'edit'  =>  'Sửa',
-    'delete'    =>  'Xóa'
+    'delete'    =>  'Xóa',
+    'private'   =>  'Riêng tư',
+    'public'    =>  'Công cộng'
 ];
