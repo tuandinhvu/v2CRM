@@ -18,7 +18,7 @@ class MenuController extends Controller
     public static function pluginMenu()
     {
         $plugins = new \App\Plugin();
-        $plugins = $plugins->select('name', 'icon', 'menu')->whereNotNull('menu');
+        $plugins = $plugins->select('name', 'menu')->whereNotNull('menu');
         $plugins = $plugins->get();
         $result =   [];
         foreach ($plugins as $pl) {

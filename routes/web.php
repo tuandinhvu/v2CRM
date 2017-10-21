@@ -59,6 +59,10 @@ Route::group(['middleware'=>'auth'], function(){
             Route::post('permission/edit', 'PermissionController@postEdit');
             Route::get('permissions/roletable', 'PermissionController@getRoletable');
             Route::post('permissions/add-group-permission', 'PermissionController@postAddGroupPermission');
+
+            Route::get('plugins', 'PluginController@getList');
+            Route::get('plugin/{plugin}/install', 'PluginController@getInstallPlugin');
+            Route::get('plugin/{plugin}/uninstall', 'PluginController@getUninstallPlugin');
         });
         Route::group(['prefix'=>'ajax'],function(){
             Route::get('routes-list', 'AjaxController@getRoutelist');

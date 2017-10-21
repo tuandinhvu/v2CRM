@@ -23,7 +23,7 @@
                 ?>
                 <table class="table table-striped">
                     <tr>
-                        <th colspan="2">BẢNG PHÂN QUYỀN</th>
+                        <th colspan="2"></th>
                         @foreach(\App\Group::all() as $item)
                             <th>{{$item->name}}</th>
                         @endforeach

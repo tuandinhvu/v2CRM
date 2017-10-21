@@ -27,7 +27,7 @@ class SystemController extends Controller
                 ];
             } else {
                 $categories[$k] = [
-                    'name'  =>  Lang::has($cat.'::options.name')?trans($cat.'::options.name'):Plugin::where('folder',$cat)->first()->name,
+                    'name'  =>  Lang::has($cat.'::options.name')?trans($cat.'::index.plugin_name'):Plugin::where('folder',$cat)->first()->name,
                     'source'    =>  $cat
                 ];
             }

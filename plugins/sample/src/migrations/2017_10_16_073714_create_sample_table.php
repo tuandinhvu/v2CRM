@@ -4,7 +4,7 @@ use Illuminate\Support\Facades\Schema;
 use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Database\Migrations\Migration;
 
-class CreateSampleTable extends Migration
+class CreateOptionsTable extends Migration
 {
     /**
      * Run the migrations.
@@ -13,11 +13,14 @@ class CreateSampleTable extends Migration
      */
     public function up()
     {
-        Schema::create('sample', function (Blueprint $table) {
+        Schema::create('options', function (Blueprint $table) {
             $table->increments('id');
             $table->string('name');
+            $table->string('label');
+            $table->string('source');
+            $table->string('type');
+            $table->text('values');
             $table->timestamps();
-            $table->softDeletes();
         });
     }
 
@@ -28,6 +31,6 @@ class CreateSampleTable extends Migration
      */
     public function down()
     {
-        Schema::dropIfExists('sample');
+        Schema::dropIfExists('options');
     }
 }

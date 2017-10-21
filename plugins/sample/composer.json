@@ -1,0 +1,23 @@
+{
+    "name": "v2crm/sample",
+    "description": "Sample plugin for v2CRM",
+    "type": "library",
+    "license": "MIT",
+    "icon"  : "fa fa-file",
+    "namespace" :   "",
+    "authors": [
+        {
+            "name": "developers",
+            "email": "cms@duytuan.net"
+        }
+    ],
+    "minimum-stability": "RC",
+    "require": {},
+    "extra": {
+        "laravel": {
+            "providers": [
+                "v2CRM\\Sample\\SampleServiceProvider"
+            ]
+        }
+    }
+}
