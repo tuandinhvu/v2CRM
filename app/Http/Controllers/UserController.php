@@ -55,7 +55,7 @@ class UserController extends Controller
     }
 
     public function getCreate()
-    {
+     {
         return v('users.create');
     }
 

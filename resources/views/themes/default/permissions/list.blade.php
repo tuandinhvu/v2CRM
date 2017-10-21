@@ -1,7 +1,7 @@
 @extends(theme(TRUE).'.layout')
 
 @section('title')
-    {{trans('page.branchlist')}}
+    {{trans('page.permissionlist')}}
 @endsection
 
 @section('content')
@@ -9,10 +9,10 @@
         <div class="col-md-12">
             <div class="box box-danger">
                 <div class="box-header with-border">
-                    <h3 class="box-title">{{trans('page.branchlist')}}</h3>
+                    <h3 class="box-title">{{trans('page.permissionlist')}}</h3>
 
                     <div class="box-tools pull-right">
-                        {!! a('config/branches/create', '', '<i class="fa fa-plus"></i> '.trans('system.add'), ['class'=>'btn btn-sm btn-primary'],'')  !!}
+                        {!! a('config/permissions/create', '', '<i class="fa fa-plus"></i> '.trans('system.add'), ['class'=>'btn btn-sm btn-primary'],'')  !!}
                     </div>
                 </div>
                 <div class="box-body">
@@ -20,8 +20,10 @@
                         <thead>
                         <tr>
                             <th>Id</th>
-                            <th>{{trans('branches.name')}}</th>
-                            <th>{{trans('branches.count')}}</th>
+                            <th>{{trans('permissions.name')}}</th>
+                            <th>{{trans('permissions.permission')}}</th>
+                            <th>{{trans('permissions.method')}}</th>
+                            <th>{{trans('permissions.type')}}</th>
                             <th>{{trans('g.manage')}}</th>
                         </tr>
                         </thead>
@@ -38,11 +40,13 @@
             $('#datatable').DataTable({
                 processing: true,
                 serverSide: true,
-                ajax: '{!! asset('config/branches/data') !!}',
+                ajax: '{!! asset('config/permissions/data') !!}',
                 columns: [
                     { data: 'id', name: 'id' },
                     { data: 'name', name: 'name' },
-                    { data: 'count', name: 'count' , sortable:false, searchable: false },
+                    { data: 'permission', name: 'permission' },
+                    { data: 'method', name: 'method' },
+                    { data: 'typename', name: 'typename' },
                     { data: 'manage', name: 'manage'  , sortable:false, searchable: false}
                 ]
             });

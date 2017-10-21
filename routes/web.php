@@ -54,11 +54,15 @@ Route::group(['middleware'=>'auth'], function(){
             Route::get('permissions/data', 'PermissionController@getData');
             Route::get('permissions/create', 'PermissionController@getCreate');
             Route::post('permissions/create', 'PermissionController@postCreate');
-            Route::get('permissions/del', 'PermissionController@getDelete');
-            Route::get('permissions/edit', 'PermissionController@getEdit');
-            Route::post('permissions/edit', 'PermissionController@postEdit');
+            Route::get('permission/del', 'PermissionController@getDelete');
+            Route::get('permission/edit', 'PermissionController@getEdit');
+            Route::post('permission/edit', 'PermissionController@postEdit');
+            Route::get('permissions/roletable', 'PermissionController@getRoletable');
+            Route::post('permissions/add-group-permission', 'PermissionController@postAddGroupPermission');
         });
-
+        Route::group(['prefix'=>'ajax'],function(){
+            Route::get('routes-list', 'AjaxController@getRoutelist');
+        });
     });
 });
 

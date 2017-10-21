@@ -8,10 +8,8 @@ class Permission extends Model
 {
     use SoftDeletes;
     protected $dates = ['deleted_at'];
+    protected $table    =   'permissions';
     public function group() {
         return $this->belongsToMany('\App\Group');
-    }
-    public function type() {
-        return $this->type=='public'?'Công cộng':'Cần phân quyền';
     }
 }

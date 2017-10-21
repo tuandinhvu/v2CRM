@@ -15,5 +15,8 @@ return [
     'branchlist'    =>  'Danh sách chi nhánh',
     'createbranch'  =>  'Thêm chi nhánh',
     'editbranch'    =>  'Sửa chi nhánh',
-    'config'    =>  'Cấu hình hệ thống'
+    'config'    =>  'Cấu hình hệ thống',
+    'permissionlist'    =>  'Danh sách quyền truy cập',
+    'createpermission'  =>  'Tạo quyền truy cập',
+    'editpermission'    =>  'Sửa quyền truy cập'
 ];

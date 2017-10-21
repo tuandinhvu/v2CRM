@@ -10,5 +10,6 @@ return [
     'edit'  =>  'Sửa',
     'delete'    =>  'Xóa',
     'private'   =>  'Riêng tư',
-    'public'    =>  'Công cộng'
+    'public'    =>  'Công cộng',
+    'manage'    =>  'Quản lý'
 ];
