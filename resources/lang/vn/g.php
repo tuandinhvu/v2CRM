@@ -11,5 +11,6 @@ return [
     'delete'    =>  'Xóa',
     'private'   =>  'Riêng tư',
     'public'    =>  'Công cộng',
-    'manage'    =>  'Quản lý'
+    'manage'    =>  'Quản lý',
+    'membersince'   =>  'Tham gia từ'
 ];

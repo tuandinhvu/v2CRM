@@ -17,7 +17,7 @@ class UserController extends Controller
     {
         return v('pages.login');
     }
-
+    
     public function postLogin(LoginRequest $request)
     {
         $logins =   json_decode(settings('system_loginas', json_encode(['id'])), 'true');
@@ -34,7 +34,11 @@ class UserController extends Controller
         }
     }
 
-
+    public function getLogout()
+    {
+        auth()->logout();
+        return redirect()->to(asset('/'));
+    }
     public function getList() {
         return v('users.list');
     }

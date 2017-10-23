@@ -18,7 +18,7 @@ Route::group(['middleware'=>'auth'], function(){
     Route::get('/', function () {
         return v('pages.index');
     });
-
+    Route::get('/user/logout', 'UserController@getLogout');
 
     Route::group(['middleware'=>'permission'], function(){
         Route::group(['prefix'=>'config'], function(){
