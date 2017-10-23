@@ -13,13 +13,14 @@ class SampleServiceProvider extends ServiceProvider
      */
     public function boot()
     {
-        $this->loadTranslationsFrom(__DIR__.'lang', 'Sample');
+
         $this->loadMigrationsFrom(__DIR__.'/migrations');
 	    $this->loadRoutesFrom(__DIR__ . '/routes.php');
         $this->loadViewsFrom(__DIR__ . '/views', 'Sample');
         $this->publishes([
             __DIR__.'/assets' => public_path('vendor/sample'),
         ], 'public');
+        $this->loadTranslationsFrom(__DIR__.'/lang', 'Sample');
     }
 
     /**
