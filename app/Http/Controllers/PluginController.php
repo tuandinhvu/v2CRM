@@ -9,6 +9,8 @@ use Carbon\Carbon;
 use Efriandika\LaravelSettings\Settings;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Artisan;
+use Illuminate\Support\Facades\DB;
+use Illuminate\Support\Facades\Schema;
 use Illuminate\Support\Facades\Storage;
 use Illuminate\Support\Facades\File;
 
@@ -46,16 +48,19 @@ class PluginController extends Controller
     public function getInstallPlugin($plugin)
     {
         $pluginClass    =   ucfirst($plugin);
-        if(Storage::disk('local')->exists("plugins/$plugin") && Storage::disk('local')->exists("plugins/$plugin/src/".$pluginClass."Plugin.php")){
+        if(Storage::disk('local')->exists("plugins/$plugin") && Storage::disk('local')->exists("plugins/$plugin/src/".$pluginClass."Plugin.php") && Plugin::where('folder',$plugin)->count() == 0){
+            $json   =   json_decode(File::get(base_path('plugins/'.$plugin.'/composer.json')));
             $classFullname      =   "\\v2CRM\\$pluginClass\\$pluginClass"."Plugin";
             $data   =   new $classFullname();
             $menu_json  =   json_encode($data->getMenu());
             $option_json    =   json_encode($data->getOptions());
             $mplugin   =   new Plugin();
             $mplugin->name   =   $data->getName();
+            $mplugin->icon  =   !empty($json->icon)?$json->icon:'fa fa-puzzle-piece';
             $mplugin->folder =   $plugin;
             $mplugin->menu    =   $menu_json;
             $mplugin->options    =   $option_json;
+            $mplugin->enabled   =   1;
             $mplugin->installed_at   =   Carbon::now();
             $mplugin->save();
             foreach($data->getMenu() as $item){
@@ -68,7 +73,7 @@ class PluginController extends Controller
                 ];
                 $id = Permission::insertGetId($permission);
                 if ($permission['type'] == 'private') {
-                    Permission::find($id)->groups()->attach(explode(',', $item['role']));
+                    Permission::find($id)->group()->attach(explode(',', $item['role']));
                 }
             }
             foreach($data->getSettings() as $item){
@@ -83,11 +88,38 @@ class PluginController extends Controller
                 Option::insert($option);
                 \Settings::set($plugin.'_'.$item['name'],$item['default']);
             }
-            Artisan::call("migration --path=plugins/$plugin/src/migrations");
+            Artisan::call("migrate", array('--path' => "plugins/$plugin/src/migrations"));
             set_notice(trans('plugins.install_success'),'success');
         }
         else
             set_notice(trans('plugins.plugin_not_found'), 'danger');
-        return redirect()->back();
+        return redirect()->to(asset('config/plugins'));
+    }
+
+    public function getUninstallPlugin($plugin)
+    {
+        $pluginClass    =   ucfirst($plugin);
+        if(Storage::disk('local')->exists("plugins/$plugin") && Storage::disk('local')->exists("plugins/$plugin/src/".$pluginClass."Plugin.php") && Plugin::where('folder',$plugin)->count() > 0){
+            $classFullname      =   "\\v2CRM\\$pluginClass\\$pluginClass"."Plugin";
+            $data   =   new $classFullname();
+            Plugin::where('folder', $plugin)->forceDelete();
+
+            foreach($data->getMenu() as $item){
+                Permission::where('permission', $item['path'])->first()->group()->detach();
+                Permission::where('permission', $item['path'])->forceDelete();
+            }
+
+            Option::where('source', $plugin)->forceDelete();
+            foreach($data->getSettings() as $item){
+                \Settings::forget($plugin.'_'.$item['name']);
+            }
+            foreach($data->getTablename() as $item){
+                Schema::dropIfExists($item);
+            }
+            set_notice(trans('plugins.uninstall_success'),'success');
+        }
+        else
+            set_notice(trans('plugins.plugin_not_found'), 'danger');
+        return redirect()->to(asset('config/plugins'));
     }
 }

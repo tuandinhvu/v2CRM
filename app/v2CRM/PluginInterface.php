@@ -15,4 +15,6 @@ interface PluginInterface
     public function getSettings();
 
     public function getOptions();
+
+    public function getTablename();
 }

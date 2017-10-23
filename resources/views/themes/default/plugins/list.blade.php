@@ -34,9 +34,9 @@
                                             <ul class="dropdown-menu" role="menu">
                                                 @if($item['installed']==TRUE)
                                                     <li><a href="javascript:;">Cài lại</a></li>
-                                                    <li><a href="javascript:;">Gỡ cài đặt</a></li>
+                                                    <li><a href="{{asset("config/plugin/".$item['folder']."/uninstall")}}">Gỡ cài đặt</a></li>
                                                 @else
-                                                    <li><a href="{{asset('plugin/'.$item['folder'].'/install')}}">Cài đặt</a></li>
+                                                    <li><a href="{{asset('config/plugin/'.$item['folder'].'/install')}}">Cài đặt</a></li>
                                                 @endif
                                             </ul>
                                         </div>

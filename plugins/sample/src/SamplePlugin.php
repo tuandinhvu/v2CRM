@@ -45,4 +45,9 @@ class SamplePlugin implements PluginInterface {
     {
        return [];
     }
+
+    public function getTablename()
+    {
+        return ['sample'];
+    }
 }
