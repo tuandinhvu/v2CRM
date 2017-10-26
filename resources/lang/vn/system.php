@@ -18,5 +18,8 @@ return [
     'cancel'    =>  'Quay lại',
     'submit'    =>  'Lưu lại',
     'add'       =>  'Thêm mới',
-    'back'      =>  'Quay lại'
+    'back'      =>  'Quay lại',
+    'widget'    =>  'Widget',
+    'leftside'  =>  'Bên trái trang',
+    'mainside'  =>  'Trang chính'
 ];

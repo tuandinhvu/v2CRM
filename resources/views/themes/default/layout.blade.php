@@ -18,6 +18,8 @@
          folder instead of downloading all of them to reduce the load. -->
     <link rel="stylesheet" href="{{asset('themes/default/css/skins/_all-skins.min.css')}}">
     <link rel="stylesheet" href="{{asset('plugins/jquery.datatables/css/jquery.dataTables.min.css')}}" />
+    <!-- jQuery 3 -->
+    <script src="{{asset('themes/default/components/jquery/dist/jquery.min.js')}}"></script>
     <!-- HTML5 Shim and Respond.js IE8 support of HTML5 elements and media queries -->
     <!-- WARNING: Respond.js doesn't work if you view the page via file:// -->
     <!--[if lt IE 9]>
@@ -133,7 +135,7 @@
     <!-- Left side column. contains the sidebar -->
     <aside class="main-sidebar">
         <!-- sidebar: style can be found in sidebar.less -->
-        <section class="sidebar">
+        <section class="sidebar" id="leftside">
 
         </section>
         <!-- /.sidebar -->
@@ -172,7 +174,6 @@
 
     <footer class="main-footer">
         <div class="pull-right hidden-xs">
-            <b>Version</b> 2.0
         </div>
         <strong>{{settings('system_footer','')}}
     </footer>
@@ -180,8 +181,6 @@
 </div>
 <!-- ./wrapper -->
 
-<!-- jQuery 3 -->
-<script src="{{asset('themes/default/components/jquery/dist/jquery.min.js')}}"></script>
 <!-- Bootstrap 3.3.7 -->
 <script src="{{asset('themes/default/components/bootstrap/dist/js/bootstrap.min.js')}}"></script>
 <!-- SlimScroll -->
@@ -192,6 +191,20 @@
 <script src="{{asset('themes/default/js/adminlte.min.js')}}"></script>
 <script src="{{asset('plugins/bootbox.min.js')}}"></script>
 <script src="{{asset('plugins/jquery.datatables/js/jquery.dataTables.js')}}"></script>
+<script>
+    function load_widget(position, url){
+        $.post(url, {_token:'{{csrf_token()}}'}, function(r){
+            $(position).append(r);
+        });
+    }
+    $(document).ready(function(){
+        @foreach(\App\Widget::orderBy('order','ASC')->where('position','leftside')->get() as $item)
+            @if(p($item->source,'post'))
+                load_widget('#leftside', '{{asset($item->source)}}');
+            @endif
+        @endforeach
+    });
+</script>
 @yield('js')
 </body>
 </html>

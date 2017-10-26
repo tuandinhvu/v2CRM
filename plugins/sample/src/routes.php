@@ -7,4 +7,5 @@
  */
 Route::group(['prefix'=>'sample','middleware'=>['web','auth']], function(){
     Route::get('','v2CRM\Sample\SampleController@getIndex');
+    Route::post('widget/index', 'v2CRM\Sample\SampleController@postWidget');
 });

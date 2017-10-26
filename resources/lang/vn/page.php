@@ -19,5 +19,6 @@ return [
     'permissionlist'    =>  'Danh sách quyền truy cập',
     'createpermission'  =>  'Tạo quyền truy cập',
     'editpermission'    =>  'Sửa quyền truy cập',
-    'pluginlist'    =>  'Danh sách plugins'
+    'pluginlist'    =>  'Danh sách plugins',
+    'widget'    =>  'Widget'
 ];

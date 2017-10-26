@@ -9,4 +9,9 @@ class SampleController extends Controller{
     {
         return view('Sample::index');
     }
+
+    public function postWidget()
+    {
+        return view('Sample::widget');
+    }
 }

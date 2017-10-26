@@ -68,6 +68,11 @@ class MenuSeeding extends Seeder
                         'path' => 'config/permissions/roletable',
                         'name'  =>  'Role Permission table',
                         'trans' => 'permission.permission_role'
+                    ],
+                    [
+                        'path' => 'config/widget',
+                        'name'  =>  'Widget manager',
+                        'trans' => 'system.widget'
                     ]
                 ],
                 'url' => ''

@@ -63,6 +63,11 @@ Route::group(['middleware'=>'auth'], function(){
             Route::get('plugins', 'PluginController@getList');
             Route::get('plugin/{plugin}/install', 'PluginController@getInstallPlugin');
             Route::get('plugin/{plugin}/uninstall', 'PluginController@getUninstallPlugin');
+
+            Route::get('widget', 'WidgetController@getIndex');
+            Route::post('widget/add', 'WidgetController@postAdd');
+            Route::post('widget/edit', 'WidgetController@postEdit');
+            Route::get('widget/delete', 'WidgetController@getDelete');
         });
         Route::group(['prefix'=>'ajax'],function(){
             Route::get('routes-list', 'AjaxController@getRoutelist');

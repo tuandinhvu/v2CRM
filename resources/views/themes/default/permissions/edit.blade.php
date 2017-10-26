@@ -64,7 +64,7 @@
                             <label class="col-sm-2 control-label">{{trans('users.group')}}</label>
 
                             <div class="col-sm-10">
-                                <select class="form-control" name="groups" multiple>
+                                <select class="form-control" name="groups[]" multiple>
                                     @foreach(\App\Group::all() as $item)
                                     <option value="{{$item->id}}" @if(in_array($item->id, $data->group()->pluck('groups.id')->all())) selected @endif>{{$item->name}}</option>
                                     @endforeach
@@ -98,7 +98,10 @@
                 tokenLimit  :   1,
                 onAdd   :   function(r){
                     $('#method').val(r.method);
-                }
+                },
+                prePopulate: [
+                    {id: "{{$data->permission}}", name: "{{strtoupper($data->method).':'.$data->permission}}"}
+                ]
             });
         });
     </script>

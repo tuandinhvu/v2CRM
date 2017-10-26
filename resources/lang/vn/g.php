@@ -12,5 +12,6 @@ return [
     'private'   =>  'Riêng tư',
     'public'    =>  'Công cộng',
     'manage'    =>  'Quản lý',
-    'membersince'   =>  'Tham gia từ'
+    'membersince'   =>  'Tham gia từ',
+    'submit'    =>  'Gửi'
 ];

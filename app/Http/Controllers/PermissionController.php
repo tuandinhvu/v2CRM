@@ -37,6 +37,7 @@ class PermissionController extends Controller
     public function postCreate(CreatePermissionRequest $request)
     {
         if (Permission::where('permission', $request->permission)->where('method', $request->input('method'))->count() == 0) {
+
             $data = new Permission();
             $data->name = $request->name;
             $data->permission = $request->permission;
@@ -45,7 +46,7 @@ class PermissionController extends Controller
             $data->created_at = Carbon::now();
             $data->save();
             if (!empty($request->groups)) {
-                $data->group()->attach(explode(',', $request->groups));
+                $data->group()->attach($request->groups);
             }
             set_notice(trans('permissions.add_success'), 'success');
         } else {
@@ -86,7 +87,7 @@ class PermissionController extends Controller
             $data->type = $request->type;
             $data->save();
             if (!empty($request->groups)) {
-                $data->group()->sync(explode(',', $request->groups));
+                $data->group()->sync($request->groups);
             }
             set_notice(trans('permissions.edit_success'), 'success');
         }else{

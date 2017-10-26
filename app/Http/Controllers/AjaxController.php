@@ -8,14 +8,17 @@ class AjaxController extends Controller
 {
     public function getRoutelist()
     {
+        $addition   =   !empty(request('type',''))?request('type','').'/':'';
+        $hideinfo =   request('hideinfo', 0);
         $data   =   \Route::getRoutes();
         $result =   [];
         $string = request()->input('term');
+        $method =   request('method','');
         foreach($data as $item){
-            if(strstr($item->uri, $string)) {
+            if(strstr($item->uri, $addition.$string) &&($method=='' || strtolower($item->methods()[0])==$method)) {
                 $result[] = [
                     'id' => $item->uri,
-                    'name' => $item->methods()[0].': '.$item->uri,
+                    'name' => $hideinfo==0?$item->methods()[0].'- '.$item->uri:$item->uri,
                     'method'    => strtolower($item->methods()[0])
                 ];
             }

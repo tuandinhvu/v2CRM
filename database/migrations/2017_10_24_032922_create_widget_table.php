@@ -13,11 +13,12 @@ class CreateWidgetTable extends Migration
      */
     public function up()
     {
-        Schema::create('widget', function (Blueprint $table) {
+        Schema::create('widgets', function (Blueprint $table) {
             $table->increments('id');
             $table->string('name');
             $table->string('source');
             $table->string('position');
+            $table->integer('order');
             $table->timestamps();
             $table->softDeletes();
         });
@@ -30,6 +31,6 @@ class CreateWidgetTable extends Migration
      */
     public function down()
     {
-        Schema::dropIfExists('widget');
+        Schema::dropIfExists('widgets');
     }
 }

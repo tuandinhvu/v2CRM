@@ -15,10 +15,8 @@
 
                 </div>
             </div>
-            <div class="box-body">
-                <div class="chart">
+            <div class="box-body" id="mainside">
 
-                </div>
             </div>
         </div>
     </div>
@@ -26,5 +24,11 @@
 @endsection
 
 @section('js')
-
+    $(document).ready(function(){
+    @foreach(\App\Widget::orderBy('order','ASC')->where('position','mainside')->get() as $item)
+        @if(p($item->source,'post'))
+            load_widget('#mainside', '{{asset($item->source)}}');
+        @endif
+    @endforeach
+    });
 @endsection
