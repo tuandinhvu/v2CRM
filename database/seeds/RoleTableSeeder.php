@@ -16,5 +16,9 @@ class RoleTableSeeder extends Seeder
             'name'  =>  'Administrator',
             'created_at'    =>  \Carbon\Carbon::now()
         ]);
+        Role::insert([
+            'name'  =>  'Director',
+            'created_at'    =>  \Carbon\Carbon::now()
+        ]);
     }
 }

@@ -38,6 +38,15 @@ class OptionSeeder extends Seeder
                 'values'    =>  json_encode([]),
                 'created_at'    =>  Carbon\Carbon::now(),
                 'default'   =>  'Site name'
+            ],
+            [
+                'name'  =>  'footer',
+                'label' =>  'Footer text',
+                'type'  =>  'text',
+                'source'    =>  'system',
+                'values'    =>  json_encode([]),
+                'created_at'    =>  Carbon\Carbon::now(),
+                'default'   =>  'Copyright v2CRM. Allright Reserved'
             ]
         ];
         \App\Option::insert($options);
