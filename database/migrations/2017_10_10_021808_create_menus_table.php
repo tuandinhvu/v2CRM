@@ -18,7 +18,6 @@ class CreateMenusTable extends Migration
             $table->string('name');
             $table->text('data');
             $table->string('options');
-            $table->tinyInteger('permission');
             $table->timestamps();
             $table->softDeletes();
         });
