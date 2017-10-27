@@ -20,7 +20,9 @@ $ composer install
 NOTE: In this step, some issue as
 > [Symfony\Component\Debug\Exception\FatalThrowableError]
 > Call to undefined method Illuminate\Foundation\Application::share()
+
 This issue because share method removed from Laravel 5.4. To fix, you can open vendor/efriandika/src/SettingServiceProvider.php, replace register method by:
+
 >public function register()
 >   {
 >        $this->mergeConfigFrom(
