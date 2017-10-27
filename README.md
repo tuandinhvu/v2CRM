@@ -11,11 +11,11 @@ v2CRM CMS to build amazing manager software so easy and flexible!
 #### 1. Clone source from this git
 ```sh
 $ git clone https://github.com/tuandinhvu/v2CRM
-```sh
+```
 #### 2. Run composer install
 ```sh
 $ composer install
-```sh
+```
 
 NOTE: In this step, some issue as
 > [Symfony\Component\Debug\Exception\FatalThrowableError]
@@ -38,7 +38,7 @@ This issue because share method removed from Laravel 5.4. To fix, you can open v
 #### 3. Creating .ENV file
 ```sh
 $ cp .env.example .env
-```sh
+```
 
 #### 4. Config Database infomations
 open .ENV and config
@@ -46,16 +46,16 @@ open .ENV and config
 #### 5. Creating hashing Key
 ```sh
 $ php artisan key:generate
-```sh
+```
 
 #### 6. Setup database
 ```sh
 $ php artisan migrate
-```sh
+```
 and
 ```sh
 $ php artisan db:seed
-```sh
+```
 
 #### 7. Enjoy it with
 Username: 1 
