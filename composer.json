@@ -27,8 +27,7 @@
             "database/factories"
         ],
         "psr-4": {
-            "App\\": "app/",
-            "v2CRM\\Sample\\": "plugins/sample/src"
+            "App\\": "app/"
         },
         "files": [
             "app/v2CRM/helpers.php",
