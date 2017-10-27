@@ -295,6 +295,12 @@ class PermissionSeeder extends Seeder
             ]
         ];
         \App\Permission::insert($permissions);
-
+        foreach(\App\Permission::all() as $permission){
+            \Illuminate\Support\Facades\DB::table('group_permission')->insert([
+                'group_id'  =>  1,
+                'permission_id' =>  $permission->id,
+                'created_at'    =>  $now
+            ]);
+        }
     }
 }

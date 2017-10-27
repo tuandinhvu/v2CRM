@@ -74,21 +74,3 @@ Route::group(['middleware'=>'auth'], function(){
         });
     });
 });
-
-
-Route::get('/install', function(){
-    echo '<pre>';
-    print_r(render_menu(array_merge(menu(1),plugin_menu())));
-});
-
-Route::get('/test', function(){
-    $data   =   \Illuminate\Support\Facades\DB::table('group_permission')->get();
-    $now    =   \Carbon\Carbon::now();
-    foreach($data as $item){
-        echo "[<br/>";
-        echo "   'permission_id' => '".$item->permission_id."',<br/>";
-        echo "   'group_id' => '".$item->group_id."',<br/>";
-        echo "   'created_at' => '".$now."',<br/>";
-        echo "],<br/>";
-    }
-});
