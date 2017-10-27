@@ -1,9 +1,9 @@
 <?php
 
-use App\Role;
+use App\Group;
 use Illuminate\Database\Seeder;
 
-class RoleTableSeeder extends Seeder
+class GroupTableSeeder extends Seeder
 {
     /**
      * Run the database seeds.
@@ -12,11 +12,11 @@ class RoleTableSeeder extends Seeder
      */
     public function run()
     {
-        Role::insert([
+        Group::insert([
             'name'  =>  'Administrator',
             'created_at'    =>  \Carbon\Carbon::now()
         ]);
-        Role::insert([
+        Group::insert([
             'name'  =>  'Director',
             'created_at'    =>  \Carbon\Carbon::now()
         ]);

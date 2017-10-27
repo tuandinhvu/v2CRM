@@ -13,7 +13,7 @@ class BranchTableSeeder extends Seeder
     public function run()
     {
         Branch::insert([
-            'name'  =>  'Văn phòng',
+            'name'  =>  trans('migartions.office'),
             'is_head'   =>  TRUE
         ]);
     }
