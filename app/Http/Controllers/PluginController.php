@@ -103,19 +103,26 @@ class PluginController extends Controller
             $classFullname      =   "\\v2CRM\\$pluginClass\\$pluginClass"."Plugin";
             $data   =   new $classFullname();
             Plugin::where('folder', $plugin)->forceDelete();
-
-            foreach($data->getMenu() as $item){
-                Permission::where('permission', $item['path'])->first()->group()->detach();
-                Permission::where('permission', $item['path'])->forceDelete();
+            if(!empty($data->getMenu())){
+                foreach($data->getMenu() as $item){
+                    Permission::where('permission', $item['path'])->first()->group()->detach();
+                    Permission::where('permission', $item['path'])->forceDelete();
+                }
             }
 
             Option::where('source', $plugin)->forceDelete();
-            foreach($data->getSettings() as $item){
-                \Settings::forget($plugin.'_'.$item['name']);
+            if(!empty($data->getSettings())){
+                foreach($data->getSettings() as $item){
+                    \Settings::forget($plugin.'_'.$item['name']);
+                }
             }
-            foreach($data->getTablename() as $item){
-                Schema::dropIfExists($item);
+
+            if(!empty($data->getTablename())){
+                foreach($data->getTablename() as $item){
+                    Schema::dropIfExists($item);
+                }
             }
+
             set_notice(trans('plugins.uninstall_success'),'success');
         }
         else
