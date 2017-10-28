@@ -47,5 +47,6 @@ return [
     'uninstallplugin'   =>  'Gỡ cài đặt plugins',
     'widgets'   =>  'Widgets',
     'addwidget' =>  'Thêm widget',
-    'delwidget' =>  'Xóa widget'
+    'delwidget' =>  'Xóa widget',
+    'office'    =>  'Văn phòng'
 ];
