@@ -22,7 +22,7 @@
                             <label class="col-sm-2 control-label">{{trans('users.name')}}</label>
 
                             <div class="col-sm-10">
-                                <input type="text" class="form-control" name="name" placeholder="{{trans('users.nameplacehold')}}" />
+                                <input type="text" class="form-control" name="name" placeholder="{{trans('users.nameplacehold')}}" value="{{old('name', $data->name)}}"/>
                             </div>
                         </div>
                     </div>
@@ -31,7 +31,7 @@
                             <label class="col-sm-2 control-label">{{trans('users.email')}}</label>
 
                             <div class="col-sm-10">
-                                <input type="text" class="form-control" name="email" placeholder="{{trans('users.emailplacehold')}}" />
+                                <input type="text" class="form-control" name="email" placeholder="{{trans('users.emailplacehold')}}"  value="{{old('email', $data->email)}}"/>
                             </div>
                         </div>
                     </div>
@@ -51,7 +51,7 @@
                             <div class="col-sm-10">
                                 <select class="form-control" name="group_id">
                                     @foreach(\App\Group::get() as $gr)
-                                        <option value="{{$gr->id}}">{{$gr->name}}</option>
+                                        <option value="{{$gr->id}}" @if( old('group_id', $data->group_id)==$gr->id) checked @endif>{{$gr->name}}</option>
                                     @endforeach
                                 </select>
                             </div>
@@ -64,7 +64,7 @@
                             <div class="col-sm-10">
                                 <select class="form-control" name="branch_id">
                                     @foreach(\App\Branch::get() as $br)
-                                        <option value="{{$br->id}}">{{$br->name}}</option>
+                                        <option value="{{$br->id}}" @if( old('branch_id', $data->branch_id)==$br->id) checked @endif>{{$br->name}}</option>
                                     @endforeach
                                 </select>
                             </div>

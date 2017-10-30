@@ -20,5 +20,6 @@ return [
     'createpermission'  =>  'Tạo quyền truy cập',
     'editpermission'    =>  'Sửa quyền truy cập',
     'pluginlist'    =>  'Danh sách plugins',
-    'widget'    =>  'Widget'
+    'widget'    =>  'Widget',
+    'editeuser' =>  'Sửa thành viên'
 ];
