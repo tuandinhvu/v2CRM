@@ -52,13 +52,17 @@ class PluginController extends Controller
             $json   =   json_decode(File::get(base_path('plugins/'.$plugin.'/composer.json')));
             $classFullname      =   "\\v2CRM\\$pluginClass\\$pluginClass"."Plugin";
             $data   =   new $classFullname();
-            $menu_json  =   json_encode($data->getMenu());
+            $menu_json  =   [];
+            foreach($data->getMenu() as $mn){
+                if($mn['menu']==TRUE)
+                    $menu_json[]    =   $mn;
+            }
             $option_json    =   json_encode($data->getOptions());
             $mplugin   =   new Plugin();
             $mplugin->name   =   $data->getName();
             $mplugin->icon  =   !empty($json->icon)?$json->icon:'fa fa-puzzle-piece';
             $mplugin->folder =   $plugin;
-            $mplugin->menu    =   $menu_json;
+            $mplugin->menu    =   json_encode($menu_json);
             $mplugin->options    =   $option_json;
             $mplugin->enabled   =   1;
             $mplugin->installed_at   =   Carbon::now();
@@ -105,8 +109,10 @@ class PluginController extends Controller
             Plugin::where('folder', $plugin)->forceDelete();
             if(!empty($data->getMenu())){
                 foreach($data->getMenu() as $item){
-                    Permission::where('permission', $item['path'])->first()->group()->detach();
-                    Permission::where('permission', $item['path'])->forceDelete();
+                    if(!empty($per = Permission::where('permission', $item['path'])) && !empty($per->first())){
+                        $per->first()->group()->detach();
+                        $per->forceDelete();
+                    }
                 }
             }
 
