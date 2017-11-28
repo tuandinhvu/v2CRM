@@ -177,6 +177,7 @@ return [
         App\Providers\EventServiceProvider::class,
         App\Providers\RouteServiceProvider::class,
         Efriandika\LaravelSettings\SettingsServiceProvider::class,
+        Laravel\Passport\PassportServiceProvider::class,
     ],
 
     /*

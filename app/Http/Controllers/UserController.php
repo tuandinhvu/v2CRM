@@ -10,6 +10,8 @@ use Carbon\Carbon;
 use Illuminate\Http\Request;
 use \DataTables;
 use Illuminate\Support\Facades\Hash;
+use Namshi\JOSE\JWT;
+use JWTAuth;
 
 class UserController extends Controller
 {
@@ -17,17 +19,33 @@ class UserController extends Controller
     {
         return v('pages.login');
     }
-    
-    public function postLogin(LoginRequest $request)
+
+    public function login($username, $password, $remember=false,$api=false)
     {
         $logins =   json_decode(settings('system_loginas', json_encode(['id'])), 'true');
         if(in_array('username',$logins))
-            $loginUsername   =   auth()->attempt(['name'=>$request->input('id'),'password'=>$request->input('password')], $request->has('remember'));
+            $loginUsername   =   auth()->attempt(['name'=>$username,'password'=>$password], $remember);
         if(in_array('email',$logins))
-            $loginEmail  =   auth()->attempt(['email'=>$request->input('id'),'password'=>$request->input('password')], $request->has('remember'));
+            $loginEmail  =   auth()->attempt(['email'=>$username,'password'=>$password], $remember);
         if(in_array('id',$logins))
-            $loginId  =   auth()->attempt(['id'=>$request->input('id'),'password'=>$request->input('password')], $request->has('remember'));
+            $loginId  =   auth()->attempt(['id'=>$username,'password'=>$password], $remember);
         if(!empty($loginEmail) || !empty($loginUsername) || !empty($loginId)){
+            if($api==true){
+                if(!empty($loginUsername))
+                    return 'username';
+                if(!empty($loginId))
+                    return 'id';
+                if(!empty($loginEmail))
+                    return 'email';
+            }
+            return TRUE;
+        } else {
+            return FALSE;
+        }
+    }
+    public function postLogin(LoginRequest $request)
+    {
+        if($this->login($request->input('id'),$request->input('password'),$request->has('remember'))){
             return redirect()->to(asset('/'));
         } else {
             return redirect()->back()->withErrors(trans('auth.failed'));
@@ -113,4 +131,15 @@ class UserController extends Controller
         return redirect()->back();
     }
 
+    public function apiLogin(LoginRequest $request)
+    {
+//        print_r($request->input());
+        if($info = $this->login($request->input('id'),$request->input('password'),$request->has('remember'), true)){
+            $api_token  =   str_random(60);
+            User::where('id',auth()->user()->id)->update(['api_token'=>$api_token]);
+            return response()->json(['status'=>'success', 'token'=>$api_token]);
+        } else {
+            return response()->json(['status'=>'wrong'],422);
+        }
+    }
 }
