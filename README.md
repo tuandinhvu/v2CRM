@@ -2,6 +2,7 @@
 v2CRM CMS to build amazing manager software so easy and flexible!
 
 # Features
+- Theme managament and Plugin managament ready!
 - Manage branches and users groups, fit with companies model
 - Permission base on route + user group so flexiable with permissions table
 - ....
