@@ -23,21 +23,21 @@ NOTE: In this step, some issue as
 > Call to undefined method Illuminate\Foundation\Application::share()
 
 This issue because share method removed from Laravel 5.4. To fix, you can open vendor/efriandika/src/SettingServiceProvider.php, replace register method by:
-
->public function register()
->   {
->        $this->mergeConfigFrom(
->            __DIR__ . '/config/settings.php', 'settings'
->        );
->        $this->app->singleton('settings', function ($app) {
->            $config = $app->config->get('settings', [
->                'cache_file' => storage_path('settings.json'),
->                'db_table'   => 'settings'
->            ]);
->            return new Settings($app['db'], new Cache($config['cache_file']), $config);
->        });
->    }
-
+```sh
+public function register()
+    {
+        $this->mergeConfigFrom(
+            __DIR__ . '/config/settings.php', 'settings'
+        );
+        $this->app->singleton('settings', function ($app) {
+            $config = $app->config->get('settings', [
+                'cache_file' => storage_path('settings.json'),
+                'db_table'   => 'settings'
+            ]);
+            return new Settings($app['db'], new Cache($config['cache_file']), $config);
+        });
+    }
+```
 #### 3. Creating .ENV file
 ```sh
 $ cp .env.example .env
