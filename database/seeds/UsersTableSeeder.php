@@ -17,7 +17,8 @@ class UsersTableSeeder extends Seeder
             'email' => 'admin@admin.com',
             'password' => \Illuminate\Support\Facades\Hash::make('123456'),
             'branch_id' => 1,
-            'role_id' => 1,
+            'group_id' => 1,
+            'api_token' =>  str_random(11),
             'created_at'    =>  \Carbon\Carbon::now()
         ]);
     }

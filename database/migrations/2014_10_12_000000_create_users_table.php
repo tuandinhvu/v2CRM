@@ -20,7 +20,7 @@ class CreateUsersTable extends Migration
             $table->string('password');
             $table->integer('group_id');
             $table->integer('branch_id');
-            $table->string('api_token', 60)->unique();
+            $table->string('api_token', 60)->unique()->nullable();
             $table->rememberToken();
             $table->timestamps();
             $table->softDeletes();
