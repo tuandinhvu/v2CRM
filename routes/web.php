@@ -61,6 +61,7 @@ Route::group(['middleware'=>'auth'], function(){
             Route::post('permissions/add-group-permission', 'PermissionController@postAddGroupPermission');
 
             Route::get('plugins', 'PluginController@getList');
+            Route::get('plugins/create', 'PluginController@getCreate');
             Route::get('plugin/{plugin}/install', 'PluginController@getInstallPlugin');
             Route::get('plugin/{plugin}/uninstall', 'PluginController@getUninstallPlugin');
 

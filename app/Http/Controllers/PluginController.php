@@ -135,4 +135,9 @@ class PluginController extends Controller
             set_notice(trans('plugins.plugin_not_found'), 'danger');
         return redirect()->to(asset('config/plugins'));
     }
+
+    public function getCreate()
+    {
+        return v('plugins.create');
+    }
 }
