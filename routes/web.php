@@ -62,6 +62,7 @@ Route::group(['middleware'=>'auth'], function(){
 
             Route::get('plugins', 'PluginController@getList');
             Route::get('plugins/create', 'PluginController@getCreate');
+            Route::post('plugins/create', 'PluginController@postCreate');
             Route::get('plugin/{plugin}/install', 'PluginController@getInstallPlugin');
             Route::get('plugin/{plugin}/uninstall', 'PluginController@getUninstallPlugin');
 

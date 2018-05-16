@@ -1,7 +1,7 @@
 @extends(theme(TRUE).'.layout')
 
 @section('title')
-    {{trans('page.createuser')}}
+    {{trans('plugins.createplugin')}}
 @endsection
 
 @section('content')
@@ -9,7 +9,7 @@
         <div class="col-md-12">
             <div class="box box-danger">
                 <div class="box-header with-border">
-                    <h3 class="box-title">{{trans('page.createplugin')}}</h3>
+                    <h3 class="box-title">{{trans('plugins.createplugin')}}</h3>
 
                     <div class="box-tools pull-right">
                         {!! a('config/plugins', '', '<i class="fa fa-arrow-left"></i> '.trans('system.back'), ['class'=>'btn btn-sm btn-success'],'')  !!}
@@ -35,6 +35,54 @@
 
                             <div class="col-sm-10">
                                 <input class="form-control" name="description" placeholder="" />
+                            </div>
+                        </div>
+                    </div>
+                    <div class="box-body">
+                        <div class="form-group">
+                            <label class="col-sm-2 control-label">{{trans('plugins.tables')}}</label>
+
+                            <div class="col-sm-10">
+                                <input class="form-control" name="tables" placeholder="{{trans('plugins.tables_placeholder')}}" />
+                            </div>
+                        </div>
+                    </div>
+                    <div class="box-body">
+                        <div class="form-group">
+                            <div class="col-sm-10 col-md-offset-2">
+                                <a class="btn btn-primary btn-xs" role="button" data-toggle="collapse" href="#advancedsettings" aria-expanded="false" aria-controls="advancedsettings">
+                                    {{trans('plugins.advanced_settings')}} <i class="fa fa-caret-down"></i>
+                                </a>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="collapse" id="advancedsettings">
+                        <div class="box-body">
+                            <div class="form-group">
+                                <label class="col-sm-2 control-label">{{trans('plugins.type')}}</label>
+
+                                <div class="col-sm-10">
+                                    <input class="form-control" name="type" value="library" placeholder="" />
+                                </div>
+                            </div>
+                        </div>
+                        <div class="box-body">
+                            <div class="form-group">
+                                <label class="col-sm-2 control-label">{{trans('plugins.license')}}</label>
+
+                                <div class="col-sm-10">
+                                    <input class="form-control" name="license" value="MIT" placeholder="" />
+                                </div>
+                            </div>
+                        </div>
+                        <div class="box-body">
+                            <div class="form-group">
+                                <label class="col-sm-2 control-label">{{trans('plugins.icon')}}</label>
+
+                                <div class="col-sm-10">
+                                    <input class="form-control" name="icon" value="fa fa-files" placeholder="" />
+                                </div>
                             </div>
                         </div>
                     </div>

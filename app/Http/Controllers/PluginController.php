@@ -2,12 +2,15 @@
 
 namespace App\Http\Controllers;
 
+use App\Http\Requests\CreatePluginRequest;
 use App\Option;
 use App\Permission;
 use App\Plugin;
 use Carbon\Carbon;
 use Efriandika\LaravelSettings\Settings;
+use function GuzzleHttp\Psr7\str;
 use Illuminate\Http\Request;
+use Illuminate\Session\Store;
 use Illuminate\Support\Facades\Artisan;
 use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Schema;
@@ -139,5 +142,113 @@ class PluginController extends Controller
     public function getCreate()
     {
         return v('plugins.create');
+    }
+
+    public function postCreate(CreatePluginRequest $request)
+    {
+        $name   =   $request->name;
+        if(Storage::exists('plugins/'.$name)){
+            set_notice(trans('plugins.plugin_existing'), 'info');
+            return redirect()->back();
+        }else{
+            if(!empty($request->tables)){
+                $tables =   explode(',', $request->tables);
+                $existing   =   [];
+                foreach($tables as $table){
+                    if(Schema::hasTable($table))
+                        $existing[] =   $table;
+                }
+                if(!empty($existing)){
+                    set_notice(trans('plugins.table_existing').': '.implode(', ', $existing), 'info');
+                    return redirect()->back();
+                }
+            }
+        }
+
+        $class  =   ucfirst($name);
+
+
+        Storage::makeDirectory("plugins/$name");
+        Storage::makeDirectory("plugins/$name/Controllers");
+        Storage::makeDirectory("plugins/$name/migrations");
+        Storage::makeDirectory("plugins/$name/Models");
+        Storage::makeDirectory("plugins/$name/views");
+        Storage::copy('/app/v2CRM/plugin_template/src/assets', "plugins/$name/src/assets");
+
+        //create composer.json
+        $composer_content   =   Storage::get('app/v2CRM/plugin_template/composer.json');
+        $composer_content   =   str_replace('{plugin_name}', $name, $composer_content);
+        $composer_content   =   str_replace('{plugin_description}', $request->description, $composer_content);
+        $composer_content   =   str_replace('{plugin_type}', $request->type, $composer_content);
+        $composer_content   =   str_replace('{plugin_license}', $request->license, $composer_content);
+        $composer_content   =   str_replace('{plugin_icon}', $request->icon, $composer_content);
+        $composer_content   =   str_replace('{author_name}', auth()->user()->name, $composer_content);
+        $composer_content   =   str_replace('{author_email}', auth()->user()->email, $composer_content);
+
+        Storage::put("plugins/$name/composer.json", $composer_content);
+
+        //create Controller
+        $controller   =   Storage::get('app/v2CRM/plugin_template/src/Controllers/SampleController.php');
+        $controller =   str_replace('Sample', $class, $controller);
+
+        Storage::put("plugins/$name/src/Controllers/".$class."Controller.php", $controller);
+
+        //create lang
+        Storage::copy('/app/v2CRM/plugin_template/src/lang', "plugins/$name/src/lang");
+
+        //create migrations and models
+        if(!empty($request->tables)){
+            $tables =   explode(',', $request->tables);
+
+            $migration  =   Storage::get('/app/v2CRM/plugin_template/src/migrations/migration.php');
+            $model  =   Storage::get('/app/v2CRM/plugin_template/src/Models/Sample.php');
+            foreach($tables as $item){
+                $item_migration =   str_replace('CreateSampleTable', 'Create'.ucfirst($item).'Table', $migration);
+                $item_migration =   str_replace('sample', $item, $item_migration);
+                Storage::put("plugins/$name/src/migrations/".date('Y_m_d_his')."_create_".$item."_table.php", $item_migration);
+
+                $item_model =   str_replace('v2CRM\Sample', 'v2CRM\\'.$class, $model);
+                $item_model =   str_replace('class Sample', 'class '.ucfirst($item), $item_model);
+                Storage::put("plugins/$name/src/Models/".ucfirst($item).".php", $item_model);
+            }
+        }
+
+        //create views
+        $index_view =   Storage::get('/app/v2CRM/plugin_template/src/views/index.blade.php');
+        $index_view =   str_replace('Sample', $class, $index_view);
+        Storage::put("plugins/$name/src/views/index.blade.php", $index_view);
+
+        Storage::copy('/app/v2CRM/plugin_template/src/views/widget.blade.php', "plugins/$name/src/views");
+
+        //create route
+        $route =   Storage::get('/app/v2CRM/plugin_template/src/routes.php');
+        $route =   str_replace('v2CRM\Sample\SampleController', "v2CRM\\".$class."\\".$class."Controller", $route);
+        $route =   str_replace("'prefix'=>'sample'", "'prefix'=>'$name'", $route);
+        Storage::put("plugins/$name/src/routes.php", $route);
+        //create define file
+        $define =   Storage::get('/app/v2CRM/plugin_template/src/SamplePlugin.php');
+        $define =   str_replace("v2CRM\Sample", "v2CRM\\".$class, $define);
+        $define =   str_replace("SamplePlugin", $class."Plugin", $define);
+        $define =   str_replace("Sample plugin", $class." Plugin", $define);
+        $define =   str_replace("Sample::", $class."::", $define);
+        $define =   str_replace("sample", $name, $define);
+        if(!empty($request->tables)){
+            $tables =   explode(',', $request->tables);
+            $table_list =   [];
+            foreach($tables as $item){
+                $table_list[]   =   "'$item'";
+            }
+            $define =   str_replace("'table_name'", $table_list, $define);
+        }
+        Storage::put("plugins/$name/src/".$class."Plugin.php", $define);
+
+        //create ServiceProvider
+        $provider =   Storage::get('/app/v2CRM/plugin_template/src/SampleServiceProvider.php');
+        $provider =   str_replace("v2CRM\Sample", "v2CRM\\".$class, $provider);
+        $provider =   str_replace("SampleServiceProvider", $class."ServiceProvider", $provider);
+        $provider =   str_replace("'Sample'", "'$class'", $provider);
+        $provider =   str_replace("sample", $name, $provider);
+
+        return v('plugins/success', $name);
     }
 }
