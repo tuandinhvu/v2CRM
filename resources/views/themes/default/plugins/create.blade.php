@@ -81,7 +81,7 @@
                                 <label class="col-sm-2 control-label">{{trans('plugins.icon')}}</label>
 
                                 <div class="col-sm-10">
-                                    <input class="form-control" name="icon" value="fa fa-files" placeholder="" />
+                                    <input class="form-control" name="icon" value="fa fa-file" placeholder="" />
                                 </div>
                             </div>
                         </div>

@@ -16,7 +16,25 @@
                     </div>
                 </div>
                 <div class="box-body">
+                    <h3>{{trans('plugins.create.headline', ['name'=>$name])}}</h3>
+                    <h3><b>I. {{trans('plugins.create.installation')}}</b></h3>
+                    <p><b>{{trans('plugins.create.follow')}}</b></p>
+                    <h4>{{trans('plugins.create.first')}}</h4>
+                    <code>
+                        {{trans('plugins.create.composer', ['name'=>$name])}}
+                    </code>
+                    <br/>
+                    <br/>
+                    <p>{!! trans('plugins.create.dumpautoload') !!}</p>
+                    <h4>{{trans('plugins.create.second')}}</h4>
+                    <code>
+                        {{trans('plugins.create.provider', ['name'=>$name])}}
+                    </code>
+                    <br/>
+                    <br/>
+                    <p><b>{!! trans('plugins.create.enjoy', ['url'=>asset($name)]) !!}</b></p>
 
+                    <h3><b>II. {{trans('plugins.create.develop')}}</b></h3>
                 </div>
             </div>
         </div>

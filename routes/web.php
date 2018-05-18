@@ -76,3 +76,8 @@ Route::group(['middleware'=>'auth'], function(){
         });
     });
 });
+
+
+Route::get('t', function(){
+   return v('plugins/success', ['name'=> 'test']);
+});

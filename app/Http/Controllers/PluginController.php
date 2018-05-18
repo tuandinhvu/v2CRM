@@ -168,13 +168,18 @@ class PluginController extends Controller
         $class  =   ucfirst($name);
 
 
-        Storage::makeDirectory("plugins/$name");
-        Storage::makeDirectory("plugins/$name/Controllers");
-        Storage::makeDirectory("plugins/$name/migrations");
-        Storage::makeDirectory("plugins/$name/Models");
-        Storage::makeDirectory("plugins/$name/views");
-        Storage::copy('/app/v2CRM/plugin_template/src/assets', "plugins/$name/src/assets");
+        Storage::makeDirectory("plugins/$name/src");
+        Storage::makeDirectory("plugins/$name/src/assets/images");
+        Storage::makeDirectory("plugins/$name/src/views");
+        Storage::makeDirectory("plugins/$name/src/Controllers");
+        Storage::makeDirectory("plugins/$name/src/migrations");
+        Storage::makeDirectory("plugins/$name/src/Models");
+        Storage::makeDirectory("plugins/$name/src/views");
 
+        Storage::copy('/app/v2CRM/plugin_template/src/assets/css/style.css', "plugins/$name/src/assets/css/style.css");
+        Storage::copy('/app/v2CRM/plugin_template/src/assets/js/script.js', "plugins/$name/src/assets/js/script.js");
+        Storage::copy('/app/v2CRM/plugin_template/src/lang/en/index.php', "plugins/$name/src/lang/en/index.php");
+        Storage::copy('/app/v2CRM/plugin_template/src/lang/vn/index.php', "plugins/$name/src/lang/vn/index.php");
         //create composer.json
         $composer_content   =   Storage::get('app/v2CRM/plugin_template/composer.json');
         $composer_content   =   str_replace('{plugin_name}', $name, $composer_content);
@@ -193,8 +198,6 @@ class PluginController extends Controller
 
         Storage::put("plugins/$name/src/Controllers/".$class."Controller.php", $controller);
 
-        //create lang
-        Storage::copy('/app/v2CRM/plugin_template/src/lang', "plugins/$name/src/lang");
 
         //create migrations and models
         if(!empty($request->tables)){
@@ -218,7 +221,7 @@ class PluginController extends Controller
         $index_view =   str_replace('Sample', $class, $index_view);
         Storage::put("plugins/$name/src/views/index.blade.php", $index_view);
 
-        Storage::copy('/app/v2CRM/plugin_template/src/views/widget.blade.php', "plugins/$name/src/views");
+        Storage::copy('/app/v2CRM/plugin_template/src/views/widget.blade.php', "plugins/$name/src/views/widget.blade.php");
 
         //create route
         $route =   Storage::get('/app/v2CRM/plugin_template/src/routes.php');
@@ -238,7 +241,7 @@ class PluginController extends Controller
             foreach($tables as $item){
                 $table_list[]   =   "'$item'";
             }
-            $define =   str_replace("'table_name'", $table_list, $define);
+            $define =   str_replace("'table_name'", implode(',', $table_list), $define);
         }
         Storage::put("plugins/$name/src/".$class."Plugin.php", $define);
 
@@ -248,7 +251,7 @@ class PluginController extends Controller
         $provider =   str_replace("SampleServiceProvider", $class."ServiceProvider", $provider);
         $provider =   str_replace("'Sample'", "'$class'", $provider);
         $provider =   str_replace("sample", $name, $provider);
-
-        return v('plugins/success', $name);
+        Storage::put("plugins/$name/src/".$class."ServiceProvider.php", $provider);
+        return v('plugins/success', compact('name'));
     }
 }
