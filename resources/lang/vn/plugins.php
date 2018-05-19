@@ -26,7 +26,7 @@ return [
         'composer' => '"v2CRM\\\\:Name\\\\": "plugins/:name/src"',
         'dumpautoload' => 'Sau đó chạy lệnh <b>composer dumpautoload</b>',
         'second' => '2. Mở file /config/app.php, thêm dòng sau vào mục Providers: ',
-        'provider' => 'v2CRM\:name\:NameServiceProvider::class',
+        'provider' => 'v2CRM\:Name\:NameServiceProvider::class',
         'enjoy' =>  'Hãy truy cập url: <a href=":url">:url</a> để xem kết quả!',
         'develop' =>  'Phát triển'
     ]
