@@ -273,6 +273,20 @@ class PermissionSeeder extends Seeder
                 'created_at' => $now,
             ],
             [
+                'name'  =>  trans('migrations.createPlugin'),
+                'permission'    =>  'config/plugins/create',
+                'method'    =>  'get',
+                'type'  =>  'private',
+                'created_at'    =>  $now
+            ],
+            [
+                'name'  =>  trans('migrations.createPlugin'),
+                'permission'    =>  'config/plugins/create',
+                'method'    =>  'post',
+                'type'  =>  'private',
+                'created_at'    =>  $now
+            ],
+            [
                 'name' => trans('migrations.widgets'),
                 'permission' => 'config/widget',
                 'method' => 'get',
