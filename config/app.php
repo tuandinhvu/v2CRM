@@ -178,6 +178,8 @@ return [
         App\Providers\RouteServiceProvider::class,
         Efriandika\LaravelSettings\SettingsServiceProvider::class,
         Laravel\Passport\PassportServiceProvider::class,
+
+        //plugin ServiceProvider here
         v2CRM\Ipfilter\IpfilterServiceProvider::class
     ],
 

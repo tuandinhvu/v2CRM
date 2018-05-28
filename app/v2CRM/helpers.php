@@ -59,6 +59,9 @@ function set_notice($message, $type='warning'){
 //setting helpers
 function opt_input($name, $type, $values=[]){
     switch ($type){
+        case 'url':
+            return redirect()->to($values);
+            break;
         case 'text':
             $result = "<input type='text' name='$name' class='form-control' value='".settings($name,'')."' />";
             break;
@@ -96,4 +99,9 @@ function opt_input($name, $type, $values=[]){
 
 function get_opt($source,$name){
     return settings($source.'_'.$name, FALSE);
+}
+
+function camelize($input, $separator = '_')
+{
+    return str_replace($separator, '', ucwords($input, $separator));
 }

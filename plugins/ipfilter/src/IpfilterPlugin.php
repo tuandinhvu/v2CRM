@@ -17,19 +17,28 @@ class IpfilterPlugin implements PluginInterface {
 
     public function getMenu()
     {
-        return $menu =  [];
+        return $menu = [
+            [
+                'path' => 'ipfilter',
+                'name' => trans('Ipfilter::index.plugin_name'),
+                'role' => '1',
+                'method' => 'get',
+                'menu' => FALSE
+            ]
+
+        ];
     }
 
     public function getSettings()
     {
         return $settings   =   [
-//            'ipfilter' => [
-//                'name' => 'default',
-//                'label' => trans('Ipfilter::index.default_option'),
-//                'type'  =>  'text',
-//                'default'   =>  'default option',
-//                'values'    =>  ''
-//            ]
+            'ipfilter' => [
+                'name' => 'default',
+                'label' => trans('Ipfilter::index.default_option'),
+                'type'  =>  'url',
+                'default'   =>  'default option',
+                'values'    =>  'ipfilter'
+            ]
         ];
     }
 
@@ -40,6 +49,6 @@ class IpfilterPlugin implements PluginInterface {
 
     public function getTablename()
     {
-        return ['accepted_ip'];
+        return ['accepted_ip', 'whitelist_ip'];
     }
 }

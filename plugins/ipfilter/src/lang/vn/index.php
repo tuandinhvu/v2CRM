@@ -7,4 +7,8 @@
  */
 return [
     'plugin_name'   =>  '',
+    'title' =>  'Cấp phép IP',
+    'ip'    =>  'Địa chỉ IP',
+    'description'   =>  'Mô tả',
+    'revoke_at' =>  'Hạn dùng'
 ];

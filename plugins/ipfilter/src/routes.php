@@ -8,4 +8,5 @@
 Route::group(['prefix'=>'ipfilter','middleware'=>['web','auth']], function(){
     Route::get('','v2CRM\Ipfilter\IpfilterController@getIndex');
     Route::post('widget/index', 'v2CRM\Ipfilter\IpfilterController@postWidget');
+    Route::get('data', 'v2CRM\Ipfilter\IpfilterController@getData');
 });
