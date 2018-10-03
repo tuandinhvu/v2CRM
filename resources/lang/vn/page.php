@@ -21,5 +21,17 @@ return [
     'editpermission'    =>  'Sửa quyền truy cập',
     'pluginlist'    =>  'Danh sách plugins',
     'widget'    =>  'Widget',
-    'editeuser' =>  'Sửa thành viên'
+    'editeuser' =>  'Sửa thành viên',
+    'eventlog'  =>  'Lịch sử truy cập',
+    'menumanagement'  =>  'Quản lý menu',
+    'pathedit'  =>  'Nhập đường dẫn mới',
+    'nameedit'  =>  'Nhập tên mới',
+    'transedit'  =>  'Nhập tên thay thế mới',
+    'menupath'  =>  'Đường dẫn menu',
+    'menuname'  =>  'Tên menu',
+    'menutrans'  =>  'Tên thay thế menu',
+    'schedule'  =>  'Lịch làm việc',
+    'createschedule'  =>  'Thêm lịch làm việc',
+    'createmenu'  =>  'Thêm menu',
+    'editmenu'    =>  'Sửa menu'
 ];

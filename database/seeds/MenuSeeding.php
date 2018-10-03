@@ -16,14 +16,12 @@ class MenuSeeding extends Seeder
                 'name'  =>  'Home',
                 'trans' =>  'system.homepage',
                 'icon'  =>  'fa fa-home',
-                'child' =>  [],
-                'url'   =>  '/'
+                'path'   =>  '/'
             ],
             [
                 'name' => 'Configuration',
                 'trans' =>  'system.configuration',
-                'icon' => 'fa fa-gears',
-                'child' => [
+                'children' => [
                     [
                         'path' => 'config/system',
                         'name'  =>  'Settings',
@@ -75,7 +73,7 @@ class MenuSeeding extends Seeder
                         'trans' => 'system.widget'
                     ]
                 ],
-                'url' => ''
+                'path' => ''
             ]
         ];
         \App\Menu::insert([
