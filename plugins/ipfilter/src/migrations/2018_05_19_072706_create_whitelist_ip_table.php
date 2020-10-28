@@ -13,7 +13,7 @@ class CreateWhitelistIpTable extends Migration
      */
     public function up()
     {
-        Schema::create('accepted_ip', function (Blueprint $table) {
+        Schema::create('whitelist_ip', function (Blueprint $table) {
             $table->increments('id');
             $table->string('ip_address');
             $table->string('description');
