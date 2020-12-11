@@ -70,6 +70,16 @@ Route::group(['middleware'=>'auth'], function(){
             Route::post('widget/add', 'WidgetController@postAdd');
             Route::post('widget/edit', 'WidgetController@postEdit');
             Route::get('widget/delete', 'WidgetController@getDelete');
+
+            Route::get('menu', ['as' => 'menu', 'uses' => 'MenuController@getIndex']);
+            Route::get('menulist', ['as' => 'menuList', 'uses' => 'MenuController@getList']);
+            Route::get('menu/create', ['as' => 'menuCreate', 'uses' => 'MenuController@getCreate']);
+            Route::post('menu/create', ['as' => 'menuCreate', 'uses' => 'MenuController@postCreate']);
+            Route::get('menu/del', ['as' => 'menuDelete', 'uses' => 'MenuController@getDelete']);
+            Route::get('menu/edit', ['as' => 'menuEdit', 'uses' => 'MenuController@getEdit']);
+            Route::post('menu/edit', ['as' => 'menuEdit', 'uses' => 'MenuController@postEdit']);
+            Route::get('menu/data', ['as' => 'menuSave', 'uses' => 'MenuController@dataMenu']);
+            Route::get('menu/datalist', ['as' => 'menuData', 'uses' => 'MenuController@dataList']);
         });
         Route::group(['prefix'=>'ajax'],function(){
             Route::get('routes-list', 'AjaxController@getRoutelist');
