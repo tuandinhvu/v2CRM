@@ -16,5 +16,6 @@ return [
     'already_exist' =>  'Quyền với phương thức này đã tồn tại rồi!',
     'roletable' =>  'Bảng phân quyền',
     'toggle_success'    =>  'Thay đổi trạng thái quyền thành công!',
-    'edit_success'  =>  'Sửa thành công'
+    'edit_success'  =>  'Sửa thành công',
+    'unRegisted'    =>  'Các quyền chưa tạo',
 ];

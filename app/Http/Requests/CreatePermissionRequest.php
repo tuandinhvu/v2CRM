@@ -26,7 +26,7 @@ class CreatePermissionRequest extends FormRequest
         return [
             'name'  =>  'required',
             'permission'    =>  'required',
-            'method'    =>  'required|in:post,get',
+            'method'    =>  'required|in:post,get,POST,GET',
             'type'  =>  'required|in:private,public',
             'groups'    =>  'required'
         ];

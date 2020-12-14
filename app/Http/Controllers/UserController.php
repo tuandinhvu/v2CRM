@@ -47,7 +47,7 @@ class UserController extends Controller
     public function postLogin(LoginRequest $request)
     {
         if($this->login($request->input('id'),$request->input('password'),$request->has('remember'))){
-            Event::fire('event.login', []);
+            event('event.login', []);
             return redirect()->to(asset('/'));
         } else {
             return redirect()->back()->withErrors(trans('auth.failed'));

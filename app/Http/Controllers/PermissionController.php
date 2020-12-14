@@ -5,11 +5,20 @@ namespace App\Http\Controllers;
 use App\Group;
 use App\Http\Requests\CreatePermissionRequest;
 use App\Permission;
+use App\Services\RouteService;
 use Carbon\Carbon;
 use Illuminate\Http\Request;
 use \DataTables;
+use Illuminate\Routing\Route;
+
 class PermissionController extends Controller
 {
+    public $routeService;
+    function __construct()
+    {
+        $this->routeService =   new RouteService();
+    }
+
     public function getList()
     {
         return v('permissions.list');
@@ -41,7 +50,7 @@ class PermissionController extends Controller
             $data = new Permission();
             $data->name = $request->name;
             $data->permission = $request->permission;
-            $data->method = $request->input('method');
+            $data->method = strtolower($request->input('method'));
             $data->type = $request->type;
             $data->created_at = Carbon::now();
             $data->save();
@@ -101,6 +110,22 @@ class PermissionController extends Controller
         $data   =   $data->get();
         $arr    =   [];
         $groups  =   Group::pluck('id')->all();
+        $routes = $this->routeService->getAll();
+        $unRegistedRoutes   =   [];
+        foreach ($routes as $route) {
+//            print_r(get_class_methods($route));
+//            print_r( $route->uri );
+//            print_r( $route->methods );
+            foreach($route->methods as $m){
+                if(in_array($route->uri,$data->pluck('permission')->toArray()) == false && !in_array($m, ['HEAD']) && !empty($route->middleware()) && in_array('permission', $route->middleware())){
+                    $unRegistedRoutes[] =   [
+                        'permission'   =>  $route->uri,
+                        'method'    =>  $m
+                    ];
+                }
+            }
+
+        }
         foreach($data as $item){
             $arr[$item->permission] =   !empty($arr[$item->permission])?$arr[$item->permission]:[];
             $arr[$item->permission][$item->method] = [
@@ -110,7 +135,7 @@ class PermissionController extends Controller
                 'type'  =>  $item->type
             ];
         }
-        return v('permissions.roletable', compact('arr'));
+        return v('permissions.roletable', compact('arr', 'unRegistedRoutes'));
     }
 
     public function postAddGroupPermission()

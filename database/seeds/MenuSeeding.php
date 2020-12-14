@@ -53,13 +53,8 @@ class MenuSeeding extends Seeder
                         'trans' => 'system.branches'
                     ],
                     [
-                        'path' => 'config/permissions',
-                        'name'  =>  'Permissions',
-                        'trans' => 'system.permissions'
-                    ],
-                    [
                         'path' => 'config/permissions/roletable',
-                        'name'  =>  'Role Permission table',
+                        'name'  =>  'Bảng phân quyền',
                         'trans' => 'permission.permission_role'
                     ],
                     [

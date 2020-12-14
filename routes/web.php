@@ -52,7 +52,7 @@ Route::group(['middleware'=>'auth'], function(){
 
             Route::get('permissions', 'PermissionController@getList');
             Route::get('permissions/data', 'PermissionController@getData');
-            Route::get('permissions/create', 'PermissionController@getCreate');
+            Route::get('permissions/create', 'PermissionController@getCreate')->name('permission.create');
             Route::post('permissions/create', 'PermissionController@postCreate');
             Route::get('permission/del', 'PermissionController@getDelete');
             Route::get('permission/edit', 'PermissionController@getEdit');
@@ -89,5 +89,17 @@ Route::group(['middleware'=>'auth'], function(){
 
 
 Route::get('t', function(){
-   return v('plugins/success', ['name'=> 'test']);
+    $service    =   new \App\Services\RouteService();
+   echo '<pre>';
+   $service->getAll();
+   foreach($service->getAll() as $itgem){
+//       print_r(get_class_methods($itgem));
+       try{
+           print_r($itgem->middleware());
+       } catch (Exception $e){
+           echo $e->getMessage().'<br/>';
+       }
+       echo $itgem->uri.'<br/>--------<br/>';
+   }
+   echo '</pre>';
 });
