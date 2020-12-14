@@ -306,6 +306,62 @@ class PermissionSeeder extends Seeder
                 'method' => 'get',
                 'type' => 'private',
                 'created_at' => $now,
+            ],
+            [
+                'name'  =>  trans('menu.list'),
+                'permission'    =>  'config/menulist',
+                'method'    =>  'get',
+                'type'  =>  'private',
+                'created_at'    =>  $now
+            ],
+            [
+                'name'  =>  trans('menu.design'),
+                'permission'    =>  'config/menu',
+                'method'    =>  'get',
+                'type'  =>  'private',
+                'created_at'    =>  $now
+            ],
+            [
+                'name'  =>  trans('menu.create'),
+                'permission'    =>  'config/menu/create',
+                'method'    =>  'get',
+                'type'  =>  'private',
+                'created_at'    =>  $now
+            ],
+            [
+                'name'  =>  trans('menu.del'),
+                'permission'    =>  'config/menu/del',
+                'method'    =>  'get',
+                'type'  =>  'private',
+                'created_at'    =>  $now
+            ],
+            [
+                'name'  =>  trans('menu.edit'),
+                'permission'    =>  'config/menu/edit',
+                'method'    =>  'get',
+                'type'  =>  'private',
+                'created_at'    =>  $now
+            ],
+            [
+                'name'  =>  trans('menu.postedit'),
+                'permission'    =>  'config/menu/edit',
+                'method'    =>  'post',
+                'type'  =>  'private',
+                'created_at'    =>  $now
+            ],
+            [
+                'name'  =>  trans('menu.data'),
+                'permission'    =>  'config/menu/data',
+                'method'    =>  'get',
+                'type'  =>  'private',
+                'created_at'    =>  $now
+            ],
+            [
+                'name'  =>  trans('menu.datalist'),
+                'permission'    =>  'config/menu/datalist',
+                'method'    =>  'get',
+                'type'  =>  'private',
+                'created_at'    =>  $now
             ]
         ];
         \App\Permission::insert($permissions);

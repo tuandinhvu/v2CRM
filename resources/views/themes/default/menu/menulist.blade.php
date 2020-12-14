@@ -12,7 +12,7 @@
                     <h3 class="box-title">{{trans('page.menumanagement')}}</h3>
 
                     <div class="box-tools pull-right">
-                        {!! a('system/menu/create', '', '<i class="fa fa-plus"></i> '.trans('system.add'), ['class'=>'btn btn-sm btn-primary'],'')  !!}
+                        {!! a('config/menu/create', '', '<i class="fa fa-plus"></i> '.trans('system.add'), ['class'=>'btn btn-sm btn-primary'],'')  !!}
                     </div>
                 </div>
                 <div class="box-body">

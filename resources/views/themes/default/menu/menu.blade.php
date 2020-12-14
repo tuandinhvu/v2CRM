@@ -18,8 +18,8 @@
                 <div class="form-inline">
                     <div class="form-group">
                         <div class="input-group" style="margin-left: 10px">
-                            <div class="input-group-addon">{{$data->name}}</div>
-                            <input type="text" class="form-control" id="menu-name" placeholder="{{trans('menu.nameplacehold')}}">
+                            <div class="input-group-addon"><b>Tên menu:</b> </div>
+                            <input type="text" class="form-control" id="menu-name" placeholder="{{trans('menu.nameplacehold')}}" value="{{$data->name}}">
                         </div>
                     </div>
                     <div class="box-body">
@@ -29,7 +29,7 @@
                                 @foreach(json_decode($data->data, true) as $item)
                                         <?php $index++; ?>
                                     <li class="dd-item" id="li-{{$index}}" data-name="{{$item['name']}}" data-trans="{{$item['trans']}}" data-path="{{$item['path']}}">
-                                        <div class="dd-handle dd3-handle">Drag</div>
+                                        <div class="dd-handle dd3-handle"></div>
                                         <div class="dd3-content" id='dd3-{{$index}}'>@if(!empty(trans($item['trans']))) {{trans($item['trans'])}} @else {{$item['name']}} @endif <a type="button" class="btn btn-xs pull-right btn-edit" id="{{$index}}" data-name="{{$item['name']}}" data-trans="{{$item['trans']}}" data-path="{{$item['path']}}" style="">Sửa</a> <a class="btn btn-xs pull-right btn-delete" id="{{$index}}" style="">Xóa</a></div>
                                         <ol class="dd-list">
                                             @if(!empty($item['children']))
@@ -37,7 +37,7 @@
                                                     <?php $index++; ?>
                                                     @if(!empty($i['name']))
                                                         <li class="dd-item" id="li-{{$index}}" data-name="{{$i['name']}}" data-trans="{{$i['trans']}}" data-path="{{$i['path']}}">
-                                                            <div class="dd-handle dd3-handle">Drag</div>
+                                                            <div class="dd-handle dd3-handle"></div>
                                                             <div class="dd3-content" id='dd3-{{$index}}'>@if(!empty(trans($i['trans']))) {{trans($i['trans'])}} @else {{$i['name']}} @endif <a class="btn btn-xs pull-right btn-edit" id="{{$index}}" data-name="{{$i['name']}}" data-trans="{{$i['trans']}}" data-path="{{$i['path']}}" style="">Sửa</a> <a class="btn btn-xs pull-right btn-delete" id="{{$index}}" style="">Xóa</a></div>
                                                         </li>
                                                     @endif
@@ -119,7 +119,6 @@
 
         </div>
     </div>
-    <link rel="stylesheet" href="{{asset('plugins/jquery.tokenInput/token-input.css')}}" />
     <link rel="stylesheet" href="{{asset('plugins/loopj-jquery-tokeninput/styles/token-input.css')}}" />
     <link rel="stylesheet" href="{{asset('plugins/loopj-jquery-tokeninput/styles/token-input-bootstrap3.css')}}" />
     <style type="text/css">
@@ -244,10 +243,8 @@
 @endsection
 
 @section('js')
-    <script src="{{asset('js/jquery.nestable.js')}}"></script>
-    <script src="{{asset('plugins/moment-develop/moment.js')}}"></script>
-    <script src="{{asset('plugins/bootstrap-datetimepicker-master/build/js/bootstrap-datetimepicker.min.js')}}"></script>
-    <script src="{{asset('plugins/jquery.tokenInput/jquery.tokeninput.js')}}" ></script>
+    <script src="{{asset('plugins/nestable/jquery.nestable.js')}}"></script>
+    <script src="{{asset('plugins/loopj-jquery-tokeninput/src/jquery.tokeninput.js')}}" ></script>
     <script>
         $(function() {
             nestable = $('.dd').nestable({ maxDepth: '2' });
@@ -260,7 +257,7 @@
             $(document).on('click', '.btn-save-menu', function(e){
                 var data = window.JSON.stringify(nestable.nestable('serialize'));
                 var name = $('.form-group #menu-name').val();
-                $.get('<?php echo asset('system/menu/data?id='.request('id')); ?>', {data: data, name, _token: '{{csrf_token()}}'}, function(r){
+                $.get('<?php echo asset('config/menu/data?id='.request('id')); ?>', {data: data, name, _token: '{{csrf_token()}}'}, function(r){
                     window.location.reload();
                 });
             });

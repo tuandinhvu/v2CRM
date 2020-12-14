@@ -12,7 +12,7 @@
                     <h3 class="box-title">{{trans('page.createmenu')}}</h3>
 
                     <div class="box-tools pull-right">
-                        {!! a('system/menulist', '', '<i class="fa fa-arrow-left"></i> '.trans('system.back'), ['class'=>'btn btn-sm btn-success'],'')  !!}
+                        {!! a('config/menulist', '', '<i class="fa fa-arrow-left"></i> '.trans('system.back'), ['class'=>'btn btn-sm btn-success'],'')  !!}
                     </div>
                 </div>
                 <form class="form-horizontal" method="post">

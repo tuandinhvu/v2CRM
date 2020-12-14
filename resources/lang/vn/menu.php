@@ -12,5 +12,12 @@ return [
     'nameplacehold' =>  'tên Menu',
     'data'  =>  'Data menu',
     'manage' =>  'Quản lý',
-    'created_at' =>  'Tạo lúc'
+    'created_at' =>  'Tạo lúc',
+    'list'  =>  'Danh sách menu',
+    'design'    =>  'Thiết kế menu',
+    'create'    =>  'Tạo mới menu',
+    'del'   =>  'Xoá menu',
+    'edit'  =>  'Sửa menu',
+    'postedit'  =>  'POST sửa menu',
+    'datalist'  =>  'Data danh sách menu'
 ];

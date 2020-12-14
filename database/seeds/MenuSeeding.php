@@ -58,6 +58,11 @@ class MenuSeeding extends Seeder
                         'trans' => 'permission.permission_role'
                     ],
                     [
+                        'path' => 'config/menulist',
+                        'name'  =>  'Quản lý menu',
+                        'trans' => 'system.menulist'
+                    ],
+                    [
                         'path' => 'config/widget',
                         'name'  =>  'Widget manager',
                         'trans' => 'system.widget'

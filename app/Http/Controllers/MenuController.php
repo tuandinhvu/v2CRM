@@ -21,7 +21,7 @@ class MenuController extends Controller
 //        $data   =   json_decode($data->data, true);
 //        print_r($data);
         if(!empty($data)){
-            event_log('Truy cập trang ['.trans('system.menu').']');
+//            event_log('Truy cập trang ['.trans('system.menu').']');
             return v('menu.menu',compact('data'));
         }
     }
@@ -31,9 +31,9 @@ class MenuController extends Controller
 
         $result = Datatables::of($data)
             ->addColumn('name', function(Menu $menu) {
-                return a('system/menu', 'id='.$menu->id,$menu->name);
+                return a('config/menu', 'id='.$menu->id,$menu->name);
             })->addColumn('manage', function($menu) {
-                return a('system/menu/del', 'id='.$menu->id,trans('g.delete'), ['class'=>'btn btn-xs btn-danger'],'#',"return bootbox.confirm('".trans('system.delete_confirm')."', function(result){if(result==true){window.location.replace('".asset('system/menu/del?id='.$menu->id)."')}})").'  '.a('system/menu/edit', 'id='.$menu->id,trans('g.edit'), ['class'=>'btn btn-xs btn-default']);
+                return a('config/menu/del', 'id='.$menu->id,trans('g.delete'), ['class'=>'btn btn-xs btn-danger'],'#',"return bootbox.confirm('".trans('system.delete_confirm')."', function(result){if(result==true){window.location.replace('".asset('config/menu/del?id='.$menu->id)."')}})").'  '.a('config/menu/edit', 'id='.$menu->id,trans('g.edit'), ['class'=>'btn btn-xs btn-default']);
             })->rawColumns(['manage','name']);
 
         return $result->make(true);
@@ -41,7 +41,7 @@ class MenuController extends Controller
 
     public function getCreate()
     {
-        event_log('Truy cập trang ['.trans('page.createmenu').']');
+//        event_log('Truy cập trang ['.trans('page.createmenu').']');
         return v('menu.create');
     }
 
@@ -53,7 +53,7 @@ class MenuController extends Controller
         $data->options   =   '{}';
         $data->created_at   =   Carbon::now();
         $data->save();
-        event_log('Tạo Menu mới '.$data->name.' id '.$data->id);
+//        event_log('Tạo Menu mới '.$data->name.' id '.$data->id);
         set_notice(trans('system.add_success'), 'success');
         return redirect()->back();
     }
@@ -61,7 +61,7 @@ class MenuController extends Controller
     {
         $data   =   Menu::find(request('id'));
         if(!empty($data)){
-            event_log('Truy cập trang ['.trans('department.edit').']');
+//            event_log('Truy cập trang ['.trans('department.edit').']');
             return v('menu.edit', compact('data'));
         }else{
             set_notice(trans('system.not_exist'), 'warning');
@@ -76,7 +76,7 @@ class MenuController extends Controller
             $data->name =   \request('name');
             $data->data =   \request('data');
             $data->save();
-            event_log('Sửa Menu '.$data->name.' id '.$data->id);
+//            event_log('Sửa Menu '.$data->name.' id '.$data->id);
             set_notice(trans('system.edit_success'), 'success');
         }else
             set_notice(trans('system.not_exist'), 'warning');
@@ -86,7 +86,7 @@ class MenuController extends Controller
     {
         $data   =   Menu::find(request('id'));
         if(!empty($data)){
-            event_log('Xóa Menu '.$data->name.' id '.$data->id);
+//            event_log('Xóa Menu '.$data->name.' id '.$data->id);
             $data->delete();
             set_notice(trans('system.delete_success'), 'success');
         }else
@@ -110,7 +110,7 @@ class MenuController extends Controller
 
         if(!empty($menu))
         {
-            event_log('Chỉnh sửa menu');
+//            event_log('Chỉnh sửa menu');
             $menu->data = $data;
             $menu->name = $name;
             $menu->created_at = Carbon::now();

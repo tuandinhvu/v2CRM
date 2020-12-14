@@ -69,4 +69,5 @@ return [
     'district'   =>  'Quận/Huyện/TP',
     'ward'   =>  'Phường/Xã',
     'street'   =>  'Đường phố',
+    'menulist'  =>  'Danh sách menu'
 ];
