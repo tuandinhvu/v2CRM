@@ -180,7 +180,8 @@ return [
         Laravel\Passport\PassportServiceProvider::class,
 
         //plugin ServiceProvider here
-        v2CRM\Ipfilter\IpfilterServiceProvider::class
+        v2CRM\Ipfilter\IpfilterServiceProvider::class,
+        v2CRM\Post\PostServiceProvider::class
     ],
 
     /*

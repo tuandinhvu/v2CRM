@@ -29,7 +29,8 @@
         ],
         "psr-4": {
             "App\\": "app/",
-            "v2CRM\\Ipfilter\\": "plugins/ipfilter/src"
+            "v2CRM\\Ipfilter\\": "plugins/ipfilter/src",
+            "v2CRM\\Post\\": "plugins/post/src"
         },
         "files": [
             "app/v2CRM/helpers.php",
